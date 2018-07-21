@@ -1,0 +1,11 @@
+version: '2'
+services:
+    learnerapp-postgresql:
+        image: postgres:10.4
+        # volumes:
+        #     - ~/volumes/jhipster/learnerapp/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=learnerapp
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432
