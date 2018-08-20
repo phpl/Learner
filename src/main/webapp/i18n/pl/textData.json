@@ -1,0 +1,24 @@
+
+{
+    "learnerappApp": {
+        "textData" : {
+            "home": {
+                "title": "Text Data",
+                "createLabel": "Dodaj Text Data",
+                "createOrEditLabel": "Dodaj lub edytuj: Text Data"
+            },
+            "created": "Utworzono nowy Text Data z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Text Data z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Text Data z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Text Data {{ id }}?"
+            },
+            "detail": {
+                "title": "Text Data"
+            },
+            "frontText": "Front Text",
+            "backText": "Back Text",
+            "card": "Card"
+        }
+    }
+}

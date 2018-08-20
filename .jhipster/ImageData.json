@@ -1,0 +1,33 @@
+{
+    "name": "ImageData",
+    "fields": [
+        {
+            "fieldName": "frontImage",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "backImage",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "card",
+            "otherEntityName": "card",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "imageData"
+        }
+    ],
+    "changelogDate": "20180820202510",
+    "entityTableName": "image_data",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

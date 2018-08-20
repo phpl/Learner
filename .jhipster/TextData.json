@@ -1,0 +1,31 @@
+{
+    "name": "TextData",
+    "fields": [
+        {
+            "fieldName": "frontText",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "backText",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "card",
+            "otherEntityName": "card",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "textData"
+        }
+    ],
+    "changelogDate": "20180820202509",
+    "entityTableName": "text_data",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

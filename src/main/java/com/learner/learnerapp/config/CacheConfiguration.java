@@ -40,6 +40,15 @@ public class CacheConfiguration {
             cm.createCache(com.learner.learnerapp.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.learner.learnerapp.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(com.learner.learnerapp.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.Tag.class.getName(), jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.Tag.class.getName() + ".cards", jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.Card.class.getName(), jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.Card.class.getName() + ".tags", jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.TextData.class.getName(), jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.ImageData.class.getName(), jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.CardInfo.class.getName(), jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.UserExtra.class.getName(), jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.UserExtra.class.getName() + ".cards", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

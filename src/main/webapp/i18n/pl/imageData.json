@@ -1,0 +1,24 @@
+
+{
+    "learnerappApp": {
+        "imageData" : {
+            "home": {
+                "title": "Image Data",
+                "createLabel": "Dodaj Image Data",
+                "createOrEditLabel": "Dodaj lub edytuj: Image Data"
+            },
+            "created": "Utworzono nowy Image Data z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Image Data z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Image Data z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Image Data {{ id }}?"
+            },
+            "detail": {
+                "title": "Image Data"
+            },
+            "frontImage": "Front Image",
+            "backImage": "Back Image",
+            "card": "Card"
+        }
+    }
+}

@@ -1,0 +1,53 @@
+{
+    "name": "Card",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "textData",
+            "otherEntityName": "textData",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "card"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "imageData",
+            "otherEntityName": "imageData",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "card"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "cardInfo",
+            "otherEntityName": "cardInfo",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "card"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "card",
+            "relationshipName": "tag",
+            "otherEntityName": "tag",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "userExtra",
+            "otherEntityName": "userExtra",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180820202508",
+    "entityTableName": "card",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

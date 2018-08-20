@@ -1,0 +1,45 @@
+{
+    "name": "CardInfo",
+    "fields": [
+        {
+            "fieldName": "repetitions",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "difficulty",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 1
+        },
+        {
+            "fieldName": "daysBetweenReviews",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "dateLastReviewed",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "card",
+            "otherEntityName": "card",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "cardInfo"
+        }
+    ],
+    "changelogDate": "20180820202511",
+    "entityTableName": "card_info",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

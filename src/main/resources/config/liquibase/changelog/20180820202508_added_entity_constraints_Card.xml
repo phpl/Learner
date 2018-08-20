@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Card.
+    -->
+    <changeSet id="20180820202508-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="text_data_id"
+                                 baseTableName="card"
+                                 constraintName="fk_card_text_data_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="text_data"/>
+
+        <addForeignKeyConstraint baseColumnNames="image_data_id"
+                                 baseTableName="card"
+                                 constraintName="fk_card_image_data_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="image_data"/>
+
+        <addForeignKeyConstraint baseColumnNames="card_info_id"
+                                 baseTableName="card"
+                                 constraintName="fk_card_card_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="card_info"/>
+
+        <addForeignKeyConstraint baseColumnNames="cards_id"
+                                 baseTableName="card_tag"
+                                 constraintName="fk_card_tag_cards_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="card"/>
+        <addForeignKeyConstraint baseColumnNames="tags_id"
+                                 baseTableName="card_tag"
+                                 constraintName="fk_card_tag_tags_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+        
+        <addForeignKeyConstraint baseColumnNames="user_extra_id"
+                                 baseTableName="card"
+                                 constraintName="fk_card_user_extra_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_extra"/>
+
+    </changeSet>
+</databaseChangeLog>

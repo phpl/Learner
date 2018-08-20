@@ -1,0 +1,43 @@
+entity Tag {
+	name String
+}
+
+entity Card
+
+entity TextData {
+	frontText String
+    backText String
+}
+
+entity ImageData {
+	frontImage ImageBlob
+    backImage ImageBlob
+}
+
+entity CardInfo {
+	repetitions Integer
+	difficulty Double min(0) max(1)
+    daysBetweenReviews Double
+    dateLastReviewed LocalDate
+}
+
+entity UserExtra
+
+relationship OneToOne {
+	Card{textData} to TextData{card}
+	Card{imageData} to ImageData{card}
+	Card{cardInfo} to CardInfo{card} 
+    UserExtra{user} to User
+}
+
+relationship ManyToMany {
+	Card{tag} to Tag{card} 
+}
+
+relationship OneToMany {
+	UserExtra{card} to Card{userExtra}
+}
+
+//relationship ManyToOne {
+//	Card{userExtra} to UserExtra{card}
+//}

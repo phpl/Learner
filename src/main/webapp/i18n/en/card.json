@@ -1,0 +1,26 @@
+
+{
+    "learnerappApp": {
+        "card" : {
+            "home": {
+                "title": "Cards",
+                "createLabel": "Create a new Card",
+                "createOrEditLabel": "Create or edit a Card"
+            },
+            "created": "A new Card is created with identifier {{ param }}",
+            "updated": "A Card is updated with identifier {{ param }}",
+            "deleted": "A Card is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Card {{ id }}?"
+            },
+            "detail": {
+                "title": "Card"
+            },
+            "textData": "Text Data",
+            "imageData": "Image Data",
+            "cardInfo": "Card Info",
+            "tag": "Tag",
+            "userExtra": "User Extra"
+        }
+    }
+}

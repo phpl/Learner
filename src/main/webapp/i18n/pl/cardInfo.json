@@ -1,0 +1,26 @@
+
+{
+    "learnerappApp": {
+        "cardInfo" : {
+            "home": {
+                "title": "Card Infos",
+                "createLabel": "Dodaj Card Info",
+                "createOrEditLabel": "Dodaj lub edytuj: Card Info"
+            },
+            "created": "Utworzono nowy Card Info z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Card Info z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Card Info z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Card Info {{ id }}?"
+            },
+            "detail": {
+                "title": "Card Info"
+            },
+            "repetitions": "Repetitions",
+            "difficulty": "Difficulty",
+            "daysBetweenReviews": "Days Between Reviews",
+            "dateLastReviewed": "Date Last Reviewed",
+            "card": "Card"
+        }
+    }
+}

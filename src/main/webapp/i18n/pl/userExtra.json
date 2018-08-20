@@ -1,0 +1,23 @@
+
+{
+    "learnerappApp": {
+        "userExtra" : {
+            "home": {
+                "title": "User Extras",
+                "createLabel": "Dodaj User Extra",
+                "createOrEditLabel": "Dodaj lub edytuj: User Extra"
+            },
+            "created": "Utworzono nowy User Extra z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono User Extra z identyfikatorem {{ param }}",
+            "deleted": "Usunięto User Extra z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć User Extra {{ id }}?"
+            },
+            "detail": {
+                "title": "User Extra"
+            },
+            "user": "User",
+            "card": "Card"
+        }
+    }
+}
