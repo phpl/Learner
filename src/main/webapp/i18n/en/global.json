@@ -135,5 +135,5 @@
         "idexists": "A new {{ entityName }} cannot already have an ID",
         "idnull": "Invalid ID"
     },
-    "footer": "This is your footer"
+    "footer": "BSc Thesis, Paweł Hadam, 2018"
 }

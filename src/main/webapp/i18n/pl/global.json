@@ -134,5 +134,5 @@
         "idexists": "Nowy {{entityName}} nie może jeszcze mieć przypisanego ID",
         "idnull": "Invalid ID"
     },
-    "footer": "To jest stopka"
+    "footer": "Praca inżynierska, Paweł Hadam, 2018"
 }
