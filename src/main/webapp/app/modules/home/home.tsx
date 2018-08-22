@@ -45,6 +45,18 @@ export class Home extends React.Component<IHomeProp> {
               </Alert>
             </div>
           )}
+          <h4>
+            <Translate contentKey="home.application.about">About application</Translate>
+          </h4>
+          <p>
+            <Translate contentKey="home.application.paragraph">Lorem Ipsum</Translate>
+          </p>
+          <h4>
+            <Translate contentKey="home.flashcards.about">About flashcards</Translate>
+          </h4>
+          <p>
+            <Translate contentKey="home.flashcards.paragraph">Lorem Ipsum</Translate>
+          </p>
         </Col>
         <Col md="3" className="pad">
           <span className="hipster rounded" />
