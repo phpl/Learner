@@ -40,6 +40,10 @@ public class CacheConfiguration {
             cm.createCache(com.learner.learnerapp.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.learner.learnerapp.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(com.learner.learnerapp.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.Card.class.getName(), jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.UserExtra.class.getName(), jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.Category.class.getName(), jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.UserExtra.class.getName() + ".cards", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

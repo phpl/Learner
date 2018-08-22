@@ -1,0 +1,70 @@
+{
+    "name": "Card",
+    "fields": [
+        {
+            "fieldName": "frontText",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "backText",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "frontImage",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "backImage",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "repetitions",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "difficulty",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": 1
+        },
+        {
+            "fieldName": "daysBetweenReviews",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "dateLastReviewed",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "card"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "userExtra",
+            "otherEntityName": "userExtra",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180822200046",
+    "entityTableName": "card",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

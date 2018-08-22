@@ -1,0 +1,29 @@
+{
+    "name": "UserExtra",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "userExtra"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "card",
+            "otherEntityName": "card",
+            "otherEntityRelationshipName": "userExtra"
+        }
+    ],
+    "changelogDate": "20180822200047",
+    "entityTableName": "user_extra",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

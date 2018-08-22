@@ -1,0 +1,31 @@
+
+{
+    "learnerappApp": {
+        "card" : {
+            "home": {
+                "title": "Cards",
+                "createLabel": "Dodaj Card",
+                "createOrEditLabel": "Dodaj lub edytuj: Card"
+            },
+            "created": "Utworzono nowy Card z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Card z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Card z identyfikatorem {{ param }}",
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Card {{ id }}?"
+            },
+            "detail": {
+                "title": "Card"
+            },
+            "frontText": "Front Text",
+            "backText": "Back Text",
+            "frontImage": "Front Image",
+            "backImage": "Back Image",
+            "repetitions": "Repetitions",
+            "difficulty": "Difficulty",
+            "daysBetweenReviews": "Days Between Reviews",
+            "dateLastReviewed": "Date Last Reviewed",
+            "category": "Category",
+            "userExtra": "User Extra"
+        }
+    }
+}
