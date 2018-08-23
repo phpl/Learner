@@ -11,7 +11,8 @@
             "updated": "Uaktualniono Card z identyfikatorem {{ param }}",
             "deleted": "Usunięto Card z identyfikatorem {{ param }}",
             "delete": {
-                "question": "Czy na pewno chcesz usunąć Card {{ id }}?"
+                "question": "Czy na pewno chcesz usunąć Card {{ id }}?",
+                "questionNoInterpolate": "Czy na pewno chcesz usunąć Kartę?"
             },
             "detail": {
                 "title": "Card"

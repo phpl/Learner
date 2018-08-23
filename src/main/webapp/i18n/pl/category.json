@@ -1,23 +1,23 @@
-
 {
-    "learnerappApp": {
-        "category" : {
-            "home": {
-                "title": "Categories",
-                "createLabel": "Dodaj Category",
-                "createOrEditLabel": "Dodaj lub edytuj: Category"
-            },
-            "created": "Utworzono nowy Category z identyfikatorem {{ param }}",
-            "updated": "Uaktualniono Category z identyfikatorem {{ param }}",
-            "deleted": "Usunięto Category z identyfikatorem {{ param }}",
-            "delete": {
-                "question": "Czy na pewno chcesz usunąć Category {{ id }}?"
-            },
-            "detail": {
-                "title": "Category"
-            },
-            "name": "Name",
-            "card": "Card"
-        }
+  "learnerappApp": {
+    "category": {
+      "home": {
+        "title": "Categories",
+        "createLabel": "Dodaj Category",
+        "createOrEditLabel": "Dodaj lub edytuj: Category",
+        "manage": "Manage categories"
+      },
+      "created": "Utworzono nowy Category z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono Category z identyfikatorem {{ param }}",
+      "deleted": "Usunięto Category z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Category {{ id }}?"
+      },
+      "detail": {
+        "title": "Category"
+      },
+      "name": "Name",
+      "card": "Card"
     }
+  }
 }

@@ -29,6 +29,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faRoad } from '@fortawesome/free-solid-svg-icons/faRoad';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
 
 export const loadIcons = () => {
   library.add(
@@ -58,6 +59,7 @@ export const loadIcons = () => {
     faFlag,
     faBell,
     faHome,
-    faRoad
+    faRoad,
+    faChalkboardTeacher
   );
 };
