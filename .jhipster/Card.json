@@ -39,7 +39,7 @@
         },
         {
             "fieldName": "dateLastReviewed",
-            "fieldType": "LocalDate"
+            "fieldType": "ZonedDateTime"
         }
     ],
     "relationships": [

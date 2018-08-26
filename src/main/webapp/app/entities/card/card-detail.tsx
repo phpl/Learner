@@ -98,7 +98,7 @@ export class CardDetail extends React.Component<ICardDetailProps> {
               </span>
             </dt>
             <dd>
-              <TextFormat value={cardEntity.dateLastReviewed} type="date" format={APP_LOCAL_DATE_FORMAT} />
+              <TextFormat value={cardEntity.dateLastReviewed} type="date" format={APP_DATE_FORMAT} />
             </dd>
             <dt>
               <Translate contentKey="learnerappApp.card.category">Category</Translate>

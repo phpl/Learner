@@ -22,11 +22,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
 import java.time.ZoneId;
 import java.util.List;
 
 
+import static com.learner.learnerapp.web.rest.TestUtil.sameInstant;
 import static com.learner.learnerapp.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -67,8 +70,8 @@ public class CardResourceIntTest {
     private static final Double DEFAULT_DAYS_BETWEEN_REVIEWS = 1D;
     private static final Double UPDATED_DAYS_BETWEEN_REVIEWS = 2D;
 
-    private static final LocalDate DEFAULT_DATE_LAST_REVIEWED = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_LAST_REVIEWED = LocalDate.now(ZoneId.systemDefault());
+    private static final ZonedDateTime DEFAULT_DATE_LAST_REVIEWED = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_DATE_LAST_REVIEWED = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private CardRepository cardRepository;
@@ -193,7 +196,7 @@ public class CardResourceIntTest {
             .andExpect(jsonPath("$.[*].repetitions").value(hasItem(DEFAULT_REPETITIONS)))
             .andExpect(jsonPath("$.[*].difficulty").value(hasItem(DEFAULT_DIFFICULTY.doubleValue())))
             .andExpect(jsonPath("$.[*].daysBetweenReviews").value(hasItem(DEFAULT_DAYS_BETWEEN_REVIEWS.doubleValue())))
-            .andExpect(jsonPath("$.[*].dateLastReviewed").value(hasItem(DEFAULT_DATE_LAST_REVIEWED.toString())));
+            .andExpect(jsonPath("$.[*].dateLastReviewed").value(hasItem(sameInstant(DEFAULT_DATE_LAST_REVIEWED))));
     }
     
 
@@ -217,7 +220,7 @@ public class CardResourceIntTest {
             .andExpect(jsonPath("$.repetitions").value(DEFAULT_REPETITIONS))
             .andExpect(jsonPath("$.difficulty").value(DEFAULT_DIFFICULTY.doubleValue()))
             .andExpect(jsonPath("$.daysBetweenReviews").value(DEFAULT_DAYS_BETWEEN_REVIEWS.doubleValue()))
-            .andExpect(jsonPath("$.dateLastReviewed").value(DEFAULT_DATE_LAST_REVIEWED.toString()));
+            .andExpect(jsonPath("$.dateLastReviewed").value(sameInstant(DEFAULT_DATE_LAST_REVIEWED)));
     }
     @Test
     @Transactional

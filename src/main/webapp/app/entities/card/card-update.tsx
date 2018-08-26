@@ -56,6 +56,8 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
   };
 
   saveEntity = (event, errors, values) => {
+    values.dateLastReviewed = new Date(values.dateLastReviewed);
+
     if (errors.length === 0) {
       const { cardEntity } = this.props;
       const entity = {
@@ -243,7 +245,13 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
                   <Label id="dateLastReviewedLabel" for="dateLastReviewed">
                     <Translate contentKey="learnerappApp.card.dateLastReviewed">Date Last Reviewed</Translate>
                   </Label>
-                  <AvField id="card-dateLastReviewed" type="date" className="form-control" name="dateLastReviewed" />
+                  <AvInput
+                    id="card-dateLastReviewed"
+                    type="datetime-local"
+                    className="form-control"
+                    name="dateLastReviewed"
+                    value={isNew ? null : convertDateTimeFromServer(this.props.cardEntity.dateLastReviewed)}
+                  />
                 </AvGroup>
                 <AvGroup>
                   <Label for="category.name">

@@ -55,7 +55,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="date_last_reviewed" type="date">
+            <column name="date_last_reviewed" type="datetime">
                 <constraints nullable="true" />
             </column>
 
@@ -69,6 +69,7 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="card" columnName="date_last_reviewed" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -58,7 +58,7 @@ public class Card implements Serializable {
     private Double daysBetweenReviews;
 
     @Column(name = "date_last_reviewed")
-    private LocalDate dateLastReviewed;
+    private ZonedDateTime dateLastReviewed;
 
     @ManyToOne
     @JsonIgnoreProperties("cards")
@@ -194,16 +194,16 @@ public class Card implements Serializable {
         this.daysBetweenReviews = daysBetweenReviews;
     }
 
-    public LocalDate getDateLastReviewed() {
+    public ZonedDateTime getDateLastReviewed() {
         return dateLastReviewed;
     }
 
-    public Card dateLastReviewed(LocalDate dateLastReviewed) {
+    public Card dateLastReviewed(ZonedDateTime dateLastReviewed) {
         this.dateLastReviewed = dateLastReviewed;
         return this;
     }
 
-    public void setDateLastReviewed(LocalDate dateLastReviewed) {
+    public void setDateLastReviewed(ZonedDateTime dateLastReviewed) {
         this.dateLastReviewed = dateLastReviewed;
     }
 

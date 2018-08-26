@@ -14,14 +14,6 @@ import settings, { SettingsState } from 'app/modules/account/settings/settings.r
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
 import sessions, { SessionsState } from 'app/modules/account/sessions/sessions.reducer';
 // prettier-ignore
-import category, {
-  CategoryState
-} from 'app/entities/category/category.reducer';
-// prettier-ignore
-import card, {
-  CardState
-} from 'app/entities/card/card.reducer';
-// prettier-ignore
 import userExtra, {
   UserExtraState
 } from 'app/entities/user-extra/user-extra.reducer';

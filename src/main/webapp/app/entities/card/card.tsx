@@ -110,7 +110,7 @@ export class Card extends React.Component<ICardProps> {
                   <td>{card.difficulty}</td>
                   <td>{card.daysBetweenReviews}</td>
                   <td>
-                    <TextFormat type="date" value={card.dateLastReviewed} format={APP_LOCAL_DATE_FORMAT} />
+                    <TextFormat type="date" value={card.dateLastReviewed} format={APP_DATE_FORMAT} />
                   </td>
                   <td>{card.category ? <Link to={`category/${card.category.id}`}>{card.category.name}</Link> : ''}</td>
                   <td>{card.userExtra ? <Link to={`userExtra/${card.userExtra.id}`}>{card.userExtra.id}</Link> : ''}</td>
