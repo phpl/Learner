@@ -2,8 +2,11 @@ package com.learner.learnerapp.web.rest;
 
 import com.learner.learnerapp.LearnerappApp;
 
+import com.learner.learnerapp.domain.User;
 import com.learner.learnerapp.domain.UserExtra;
 import com.learner.learnerapp.repository.UserExtraRepository;
+import com.learner.learnerapp.repository.UserRepository;
+import com.learner.learnerapp.service.UserService;
 import com.learner.learnerapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -59,11 +62,15 @@ public class UserExtraResourceIntTest {
 
     private UserExtra userExtra;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         final UserExtraResource userExtraResource = new UserExtraResource(userExtraRepository);
-        this.restUserExtraMockMvc = MockMvcBuilders.standaloneSetup(userExtraResource)
+        final UserResource userResource = new UserResource(null, userRepository, null);
+        this.restUserExtraMockMvc = MockMvcBuilders.standaloneSetup(userExtraResource, userResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
@@ -78,6 +85,10 @@ public class UserExtraResourceIntTest {
      */
     public static UserExtra createEntity(EntityManager em) {
         UserExtra userExtra = new UserExtra();
+        User user = new User();
+        user.setId(1L);
+        userExtra.setUser(user);
+        userExtra.setId(user.getId());
         return userExtra;
     }
 
@@ -101,25 +112,6 @@ public class UserExtraResourceIntTest {
         List<UserExtra> userExtraList = userExtraRepository.findAll();
         assertThat(userExtraList).hasSize(databaseSizeBeforeCreate + 1);
         UserExtra testUserExtra = userExtraList.get(userExtraList.size() - 1);
-    }
-
-    @Test
-    @Transactional
-    public void createUserExtraWithExistingId() throws Exception {
-        int databaseSizeBeforeCreate = userExtraRepository.findAll().size();
-
-        // Create the UserExtra with an existing ID
-        userExtra.setId(1L);
-
-        // An entity with an existing ID cannot be created, so this API call must fail
-        restUserExtraMockMvc.perform(post("/api/user-extras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userExtra)))
-            .andExpect(status().isBadRequest());
-
-        // Validate the UserExtra in the database
-        List<UserExtra> userExtraList = userExtraRepository.findAll();
-        assertThat(userExtraList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
@@ -178,24 +170,6 @@ public class UserExtraResourceIntTest {
         List<UserExtra> userExtraList = userExtraRepository.findAll();
         assertThat(userExtraList).hasSize(databaseSizeBeforeUpdate);
         UserExtra testUserExtra = userExtraList.get(userExtraList.size() - 1);
-    }
-
-    @Test
-    @Transactional
-    public void updateNonExistingUserExtra() throws Exception {
-        int databaseSizeBeforeUpdate = userExtraRepository.findAll().size();
-
-        // Create the UserExtra
-
-        // If the entity doesn't have an ID, it will be created instead of just being updated
-        restUserExtraMockMvc.perform(put("/api/user-extras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userExtra)))
-            .andExpect(status().isBadRequest());
-
-        // Validate the UserExtra in the database
-        List<UserExtra> userExtraList = userExtraRepository.findAll();
-        assertThat(userExtraList).hasSize(databaseSizeBeforeUpdate);
     }
 
     @Test
