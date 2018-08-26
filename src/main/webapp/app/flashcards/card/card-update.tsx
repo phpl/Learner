@@ -94,7 +94,7 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
   };
 
   render() {
-    const { cardEntity, categories, userExtras, loading, updating } = this.props;
+    const { cardEntity, categories, loading, updating } = this.props;
     const { isNew } = this.state;
 
     const { frontImage, frontImageContentType, backImage, backImageContentType } = cardEntity;

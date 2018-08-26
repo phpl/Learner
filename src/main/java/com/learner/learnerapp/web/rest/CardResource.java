@@ -2,12 +2,20 @@ package com.learner.learnerapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.learner.learnerapp.domain.Card;
+import com.learner.learnerapp.domain.User;
+import com.learner.learnerapp.domain.UserExtra;
 import com.learner.learnerapp.repository.CardRepository;
+import com.learner.learnerapp.repository.UserExtraRepository;
+import com.learner.learnerapp.repository.UserRepository;
+import com.learner.learnerapp.security.SecurityUtils;
 import com.learner.learnerapp.web.rest.errors.BadRequestAlertException;
 import com.learner.learnerapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import net.bytebuddy.asm.Advice;
+import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +38,10 @@ public class CardResource {
     private static final String ENTITY_NAME = "card";
 
     private final CardRepository cardRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private UserExtraRepository userExtraRepository;
 
     public CardResource(CardRepository cardRepository) {
         this.cardRepository = cardRepository;
@@ -49,6 +61,14 @@ public class CardResource {
         if (card.getId() != null) {
             throw new BadRequestAlertException("A new card cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (card.getUserExtra() == null) {
+            Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
+            Optional<User> currentUser = userRepository.findOneByLogin(currentUserLogin.get());
+            Optional<UserExtra> currentUserExtra = userExtraRepository.findById(currentUser.get().getId());
+            card.setUserExtra(currentUserExtra.get());
+        }
+
         Card result = cardRepository.save(card);
         return ResponseEntity.created(new URI("/api/cards/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

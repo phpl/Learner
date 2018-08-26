@@ -249,11 +249,18 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
                   <Label for="category.name">
                     <Translate contentKey="learnerappApp.card.category">Category</Translate>
                   </Label>
-                  <AvInput id="card-category" type="select" className="form-control" name="category.name" onChange={this.categoryUpdate}>
+                  <AvInput
+                    id="card-category"
+                    type="select"
+                    className="form-control"
+                    name="category.id"
+                    onChange={this.categoryUpdate}
+                    value={isNew && categories ? categories[0] && categories[0].id : ''}
+                  >
                     <option value="" key="0" />
                     {categories
                       ? categories.map(otherEntity => (
-                          <option value={otherEntity.name} key={otherEntity.id}>
+                          <option value={otherEntity.id} key={otherEntity.id}>
                             {otherEntity.name}
                           </option>
                         ))
