@@ -6,7 +6,8 @@
             "home": "Home",
             "app" : {
               "main" : "Start",
-              "card" : "Manage Cards"
+              "card" : "Manage Cards",
+              "category" : "Manage Categories"
             },
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {

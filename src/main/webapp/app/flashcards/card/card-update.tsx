@@ -207,10 +207,6 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
                   <Label for="category.name">
                     <Translate contentKey="learnerappApp.card.category">Category</Translate>
                   </Label>
-                  &nbsp;
-                  <Link to={`/flashcards/category`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-                    <Translate contentKey="learnerappApp.category.home.manage">Manage Categories</Translate>
-                  </Link>
                   <AvInput
                     id="card-category"
                     type="select"

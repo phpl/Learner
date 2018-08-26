@@ -6,7 +6,8 @@
       "home": "Strona domowa",
       "app": {
         "main": "Start",
-        "card": "Zarządzaj kartami"
+        "card": "Zarządzaj kartami",
+        "category" : "Zarządzaj kategoriami"
       },
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {

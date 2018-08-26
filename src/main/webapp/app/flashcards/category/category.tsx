@@ -33,10 +33,6 @@ export class Category extends React.Component<ICategoryProps> {
             <FontAwesomeIcon icon="plus" />&nbsp;
             <Translate contentKey="learnerappApp.category.home.createLabel">Create new Category</Translate>
           </Link>
-          <Link to={`/flashcards/card/new`} className="btn btn-info float-right jh-create-entity" style={linkStyle}>
-            <FontAwesomeIcon icon="arrow-left" />&nbsp;
-            <Translate contentKey="entity.action.back">Back</Translate>
-          </Link>
         </h2>
         <div className="table-responsive">
           <Table responsive>
