@@ -5,6 +5,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.learner.learnerapp.domain.PersistentToken;
 import com.learner.learnerapp.repository.PersistentTokenRepository;
 import com.learner.learnerapp.domain.User;
+import com.learner.learnerapp.repository.UserExtraRepository;
 import com.learner.learnerapp.repository.UserRepository;
 import com.learner.learnerapp.security.SecurityUtils;
 import com.learner.learnerapp.service.MailService;
@@ -17,6 +18,7 @@ import com.learner.learnerapp.web.rest.vm.ManagedUserVM;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

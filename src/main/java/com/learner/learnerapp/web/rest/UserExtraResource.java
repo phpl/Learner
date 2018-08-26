@@ -45,9 +45,7 @@ public class UserExtraResource {
     @Timed
     public ResponseEntity<UserExtra> createUserExtra(@RequestBody UserExtra userExtra) throws URISyntaxException {
         log.debug("REST request to save UserExtra : {}", userExtra);
-        if (userExtra.getId() != null) {
-            throw new BadRequestAlertException("A new userExtra cannot already have an ID", ENTITY_NAME, "idexists");
-        }
+        userExtra.setId(userExtra.getUser().getId());
         UserExtra result = userExtraRepository.save(userExtra);
         return ResponseEntity.created(new URI("/api/user-extras/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

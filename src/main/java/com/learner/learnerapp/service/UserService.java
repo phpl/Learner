@@ -2,9 +2,11 @@ package com.learner.learnerapp.service;
 
 import com.learner.learnerapp.domain.Authority;
 import com.learner.learnerapp.domain.User;
+import com.learner.learnerapp.domain.UserExtra;
 import com.learner.learnerapp.repository.AuthorityRepository;
 import com.learner.learnerapp.repository.PersistentTokenRepository;
 import com.learner.learnerapp.config.Constants;
+import com.learner.learnerapp.repository.UserExtraRepository;
 import com.learner.learnerapp.repository.UserRepository;
 import com.learner.learnerapp.security.AuthoritiesConstants;
 import com.learner.learnerapp.security.SecurityUtils;
@@ -13,6 +15,7 @@ import com.learner.learnerapp.service.dto.UserDTO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,6 +49,9 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
+
+    @Autowired
+    private UserExtraService userExtraService;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
@@ -115,8 +121,11 @@ public class UserService {
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
+        userExtraService.registerUserExtra(newUser);
+
         return newUser;
     }
+
 
     public User createUser(UserDTO userDTO) {
         User user = new User();
@@ -209,6 +218,7 @@ public class UserService {
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
             userRepository.delete(user);
+            userExtraService.deleteUserExtra(user.getId());
             this.clearUserCaches(user);
             log.debug("Deleted User: {}", user);
         });
