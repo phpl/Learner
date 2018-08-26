@@ -1,0 +1,26 @@
+
+entity Category {
+	name String required
+}
+
+entity Card {
+	frontText String
+    backText String
+	frontImage ImageBlob
+    backImage ImageBlob
+	repetitions Integer
+	difficulty Double min(0) max(1)
+    daysBetweenReviews Double
+    dateLastReviewed LocalDate
+}
+
+entity UserExtra
+
+relationship OneToOne {
+    UserExtra{user} to User
+}
+
+relationship OneToMany {
+	Category{card} to Card{category(name) } 
+    UserExtra{card} to Card{userExtra}
+}

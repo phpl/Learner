@@ -93,23 +93,6 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
     }
   };
 
-  userExtraUpdate = element => {
-    const id = element.target.value.toString();
-    if (id === '') {
-      this.setState({
-        userExtraId: -1
-      });
-    } else {
-      for (const i in this.props.userExtras) {
-        if (id === this.props.userExtras[i].id.toString()) {
-          this.setState({
-            userExtraId: this.props.userExtras[i].id
-          });
-        }
-      }
-    }
-  };
-
   render() {
     const { cardEntity, categories, userExtras, loading, updating } = this.props;
     const { isNew } = this.state;
@@ -227,9 +210,6 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
                 </AvGroup>
                 <AvGroup>
                   <AvField id="card-daysBetweenReviews" value="1" type="hidden" className="form-control" name="daysBetweenReviews" />
-                </AvGroup>
-                <AvGroup>
-                  <AvField id="card-userExtra" value="2653" type="hidden" className="form-control" name="userExtra.id" onChange={this.userExtraUpdate} />
                 </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/flashcards/card" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />&nbsp;

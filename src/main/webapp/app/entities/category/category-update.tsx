@@ -8,8 +8,6 @@ import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
-import { ICard } from 'app/shared/model/card.model';
-import { getEntities as getCards } from 'app/entities/card/card.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './category.reducer';
 import { ICategory } from 'app/shared/model/category.model';
 // tslint:disable-next-line:no-unused-variable
@@ -20,14 +18,12 @@ export interface ICategoryUpdateProps extends StateProps, DispatchProps, RouteCo
 
 export interface ICategoryUpdateState {
   isNew: boolean;
-  cardId: number;
 }
 
 export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICategoryUpdateState> {
   constructor(props) {
     super(props);
     this.state = {
-      cardId: 0,
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -38,8 +34,6 @@ export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICateg
     } else {
       this.props.getEntity(this.props.match.params.id);
     }
-
-    this.props.getCards();
   }
 
   saveEntity = (event, errors, values) => {
@@ -64,7 +58,7 @@ export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICateg
   };
 
   render() {
-    const { categoryEntity, cards, loading, updating } = this.props;
+    const { categoryEntity, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -124,14 +118,12 @@ export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICateg
 }
 
 const mapStateToProps = (storeState: IRootState) => ({
-  cards: storeState.card.entities,
   categoryEntity: storeState.category.entity,
   loading: storeState.category.loading,
   updating: storeState.category.updating
 });
 
 const mapDispatchToProps = {
-  getCards,
   getEntity,
   updateEntity,
   createEntity,

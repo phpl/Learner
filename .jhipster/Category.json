@@ -11,10 +11,9 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
+            "relationshipType": "one-to-many",
             "relationshipName": "card",
             "otherEntityName": "card",
-            "ownerSide": false,
             "otherEntityRelationshipName": "category"
         }
     ],

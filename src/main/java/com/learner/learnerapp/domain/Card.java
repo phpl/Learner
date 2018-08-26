@@ -60,8 +60,8 @@ public class Card implements Serializable {
     @Column(name = "date_last_reviewed")
     private LocalDate dateLastReviewed;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
+    @JsonIgnoreProperties("cards")
     private Category category;
 
     @ManyToOne

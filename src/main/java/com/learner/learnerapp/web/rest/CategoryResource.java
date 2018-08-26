@@ -17,8 +17,6 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing Category.
@@ -82,19 +80,11 @@ public class CategoryResource {
     /**
      * GET  /categories : get all the categories.
      *
-     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of categories in body
      */
     @GetMapping("/categories")
     @Timed
-    public List<Category> getAllCategories(@RequestParam(required = false) String filter) {
-        if ("card-is-null".equals(filter)) {
-            log.debug("REST request to get all Categorys where card is null");
-            return StreamSupport
-                .stream(categoryRepository.findAll().spliterator(), false)
-                .filter(category -> category.getCard() == null)
-                .collect(Collectors.toList());
-        }
+    public List<Category> getAllCategories() {
         log.debug("REST request to get all Categories");
         return categoryRepository.findAll();
     }

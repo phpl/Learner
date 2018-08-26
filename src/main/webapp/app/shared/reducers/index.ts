@@ -25,6 +25,14 @@ import card, {
 import userExtra, {
   UserExtraState
 } from 'app/entities/user-extra/user-extra.reducer';
+// prettier-ignore
+import category, {
+  CategoryState
+} from 'app/entities/category/category.reducer';
+// prettier-ignore
+import card, {
+  CardState
+} from 'app/entities/card/card.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {

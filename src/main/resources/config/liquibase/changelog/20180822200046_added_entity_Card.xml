@@ -58,9 +58,11 @@
             <column name="date_last_reviewed" type="date">
                 <constraints nullable="true" />
             </column>
+
             <column name="category_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints nullable="true" />
             </column>
+
             <column name="user_extra_id" type="bigint">
                 <constraints nullable="true" />
             </column>

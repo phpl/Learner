@@ -5,8 +5,7 @@
             "home": {
                 "title": "Categories",
                 "createLabel": "Create a new Category",
-                "createOrEditLabel": "Create or edit a Category",
-                "manage" : "Manage categories"
+                "createOrEditLabel": "Create or edit a Category"
             },
             "created": "A new Category is created with identifier {{ param }}",
             "updated": "A Category is updated with identifier {{ param }}",

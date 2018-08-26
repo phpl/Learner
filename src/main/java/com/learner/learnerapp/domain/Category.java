@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -29,9 +31,9 @@ public class Category implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne(mappedBy = "category")
-    @JsonIgnore
-    private Card card;
+    @OneToMany(mappedBy = "category")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Card> cards = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -55,17 +57,29 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Card getCard() {
-        return card;
+    public Set<Card> getCards() {
+        return cards;
     }
 
-    public Category card(Card card) {
-        this.card = card;
+    public Category cards(Set<Card> cards) {
+        this.cards = cards;
         return this;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
+    public Category addCard(Card card) {
+        this.cards.add(card);
+        card.setCategory(this);
+        return this;
+    }
+
+    public Category removeCard(Card card) {
+        this.cards.remove(card);
+        card.setCategory(null);
+        return this;
+    }
+
+    public void setCards(Set<Card> cards) {
+        this.cards = cards;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
