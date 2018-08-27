@@ -155,6 +155,8 @@ public class UserService {
         userRepository.save(user);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
+        userExtraService.registerUserExtra(user);
+
         return user;
     }
 
