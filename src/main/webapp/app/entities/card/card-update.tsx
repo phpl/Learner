@@ -118,6 +118,12 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
 
     const { frontImage, frontImageContentType, backImage, backImageContentType } = cardEntity;
 
+    const defaultValues = {
+      'repetitions': 0,
+      'difficulty': 0.3,
+      'daysBetweenReviews': 1
+    };
+
     return (
       <div>
         <Row className="justify-content-center">
@@ -132,7 +138,7 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
             {loading ? (
               <p>Loading...</p>
             ) : (
-              <AvForm model={isNew ? {} : cardEntity} onSubmit={this.saveEntity}>
+              <AvForm model={isNew ? defaultValues : cardEntity} onSubmit={this.saveEntity}>
                 {!isNew ? (
                   <AvGroup>
                     <Label for="id">
