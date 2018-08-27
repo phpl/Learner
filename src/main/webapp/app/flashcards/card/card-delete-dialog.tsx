@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { ICard } from 'app/shared/model/card.model';
 import { IRootState } from 'app/shared/reducers/index';
-import { getEntity, deleteEntity } from 'app/entities/card/card.reducer';
+import { getEntity, deleteEntityForLoggedUser } from 'app/entities/card/card.reducer';
 
 export interface ICardDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
 
@@ -17,7 +17,7 @@ export class CardDeleteDialog extends React.Component<ICardDeleteDialogProps> {
   }
 
   confirmDelete = event => {
-    this.props.deleteEntity(this.props.cardEntity.id);
+    this.props.deleteEntityForLoggedUser(this.props.cardEntity.id);
     this.handleClose(event);
   };
 
@@ -56,7 +56,7 @@ const mapStateToProps = ({ card }: IRootState) => ({
   cardEntity: card.entity
 });
 
-const mapDispatchToProps = { getEntity, deleteEntity };
+const mapDispatchToProps = { getEntity, deleteEntityForLoggedUser };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

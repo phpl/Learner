@@ -11,7 +11,8 @@
             "updated": "A Card is updated with identifier {{ param }}",
             "deleted": "A Card is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Card {{ id }}?"
+                "question": "Are you sure you want to delete Card {{ id }}?",
+                "questionNoInterpolate": "Are you sure you want to delete Card?"
             },
             "detail": {
                 "title": "Card"

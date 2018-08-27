@@ -12,7 +12,12 @@ import { ICategory } from 'app/shared/model/category.model';
 import { getEntities as getCategories } from 'app/entities/category/category.reducer';
 import { IUserExtra } from 'app/shared/model/user-extra.model';
 import { getEntities as getUserExtras } from 'app/entities/user-extra/user-extra.reducer';
-import { getEntity, updateEntity, createEntity, setBlob, reset } from 'app/entities/card/card.reducer';
+import {
+  getEntity,
+  setBlob,
+  reset,
+  createEntityForLoggedUser, updateEntityForLoggedUser
+} from 'app/entities/card/card.reducer';
 import { ICard } from 'app/shared/model/card.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
@@ -64,9 +69,9 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
       };
 
       if (this.state.isNew) {
-        this.props.createEntity(entity);
+        this.props.createEntityForLoggedUser(entity);
       } else {
-        this.props.updateEntity(entity);
+        this.props.updateEntityForLoggedUser(entity);
       }
       this.handleClose();
     }
@@ -255,9 +260,9 @@ const mapDispatchToProps = {
   getCategories,
   getUserExtras,
   getEntity,
-  updateEntity,
+  updateEntityForLoggedUser,
   setBlob,
-  createEntity,
+  createEntityForLoggedUser,
   reset
 };
 

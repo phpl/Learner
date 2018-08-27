@@ -63,9 +63,7 @@ public class CardResource {
         }
 
         if (card.getUserExtra() == null) {
-            Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
-            Optional<User> currentUser = userRepository.findOneByLogin(currentUserLogin.get());
-            Optional<UserExtra> currentUserExtra = userExtraRepository.findById(currentUser.get().getId());
+            Optional<UserExtra> currentUserExtra = getLoggedUserExtra();
             card.setUserExtra(currentUserExtra.get());
         }
 
@@ -73,6 +71,12 @@ public class CardResource {
         return ResponseEntity.created(new URI("/api/cards/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    private Optional<UserExtra> getLoggedUserExtra() {
+        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
+        Optional<User> currentUser = userRepository.findOneByLogin(currentUserLogin.get());
+        return userExtraRepository.findById(currentUser.get().getId());
     }
 
     /**
@@ -104,9 +108,9 @@ public class CardResource {
      */
     @GetMapping("/cards")
     @Timed
-    public List<Card> getAllCards() {
-        log.debug("REST request to get all Cards");
-        return cardRepository.findAll();
+    public List<Card> getAllCards(@RequestParam(value="logged", required = false, defaultValue = "false") boolean logged) {
+        log.debug("REST request to get all Cards. User logged: {}", logged);
+        return logged ? cardRepository.findAllByUserExtraId(getLoggedUserExtra().get().getId()) : cardRepository.findAll();
     }
 
     /**

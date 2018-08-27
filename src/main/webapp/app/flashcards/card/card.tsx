@@ -7,7 +7,7 @@ import { openFile, byteSize, Translate, ICrudGetAllAction, TextFormat } from 're
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntities } from 'app/entities/card/card.reducer';
+import { getEntitiesForLoggedUser } from 'app/entities/card/card.reducer';
 import { ICard } from 'app/shared/model/card.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -16,7 +16,7 @@ export interface ICardProps extends StateProps, DispatchProps, RouteComponentPro
 
 export class Card extends React.Component<ICardProps> {
   componentDidMount() {
-    this.props.getEntities();
+    this.props.getEntitiesForLoggedUser();
   }
 
   render() {
@@ -131,7 +131,7 @@ const mapStateToProps = ({ card }: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getEntities
+  getEntitiesForLoggedUser
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

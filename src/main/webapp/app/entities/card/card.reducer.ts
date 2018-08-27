@@ -151,6 +151,39 @@ export const deleteEntity: ICrudDeleteAction<ICard> = id => async dispatch => {
   return result;
 };
 
+export const getEntitiesForLoggedUser: ICrudGetAllAction<ICard> = (page, size, sort) => ({
+  type: ACTION_TYPES.FETCH_CARD_LIST,
+  payload: axios.get<ICard>(`${apiUrl}?logged=1&cacheBuster=${new Date().getTime()}`)
+});
+
+export const createEntityForLoggedUser: ICrudPutAction<ICard> = entity => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.CREATE_CARD,
+    payload: axios.post(apiUrl, cleanEntity(entity))
+  });
+  dispatch(getEntitiesForLoggedUser());
+  return result;
+};
+
+export const updateEntityForLoggedUser: ICrudPutAction<ICard> = entity => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.UPDATE_CARD,
+    payload: axios.put(apiUrl, cleanEntity(entity))
+  });
+  dispatch(getEntitiesForLoggedUser());
+  return result;
+};
+
+export const deleteEntityForLoggedUser: ICrudDeleteAction<ICard> = id => async dispatch => {
+  const requestUrl = `${apiUrl}/${id}`;
+  const result = await dispatch({
+    type: ACTION_TYPES.DELETE_CARD,
+    payload: axios.delete(requestUrl)
+  });
+  dispatch(getEntitiesForLoggedUser());
+  return result;
+};
+
 export const setBlob = (name, data, contentType?) => ({
   type: ACTION_TYPES.SET_BLOB,
   payload: {
