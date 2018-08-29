@@ -15,6 +15,12 @@
             "relationshipName": "card",
             "otherEntityName": "card",
             "otherEntityRelationshipName": "category"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "userExtra",
+            "otherEntityName": "userExtra",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20180822200839",

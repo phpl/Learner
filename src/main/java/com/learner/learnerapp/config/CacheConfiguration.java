@@ -45,6 +45,7 @@ public class CacheConfiguration {
             cm.createCache(com.learner.learnerapp.domain.Category.class.getName(), jcacheConfiguration);
             cm.createCache(com.learner.learnerapp.domain.UserExtra.class.getName() + ".cards", jcacheConfiguration);
             cm.createCache(com.learner.learnerapp.domain.Category.class.getName() + ".cards", jcacheConfiguration);
+            cm.createCache(com.learner.learnerapp.domain.UserExtra.class.getName() + ".categories", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

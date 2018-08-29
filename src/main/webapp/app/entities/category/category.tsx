@@ -40,6 +40,9 @@ export class Category extends React.Component<ICategoryProps> {
                 <th>
                   <Translate contentKey="learnerappApp.category.name">Name</Translate>
                 </th>
+                <th>
+                  <Translate contentKey="learnerappApp.category.userExtra">User Extra</Translate>
+                </th>
                 <th />
               </tr>
             </thead>
@@ -52,6 +55,7 @@ export class Category extends React.Component<ICategoryProps> {
                     </Button>
                   </td>
                   <td>{category.name}</td>
+                  <td>{category.userExtra ? <Link to={`userExtra/${category.userExtra.id}`}>{category.userExtra.id}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${category.id}`} color="info" size="sm">

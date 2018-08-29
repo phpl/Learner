@@ -8,6 +8,8 @@ import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
+import { IUserExtra } from 'app/shared/model/user-extra.model';
+import { getEntities as getUserExtras } from 'app/entities/user-extra/user-extra.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './category.reducer';
 import { ICategory } from 'app/shared/model/category.model';
 // tslint:disable-next-line:no-unused-variable
@@ -18,12 +20,14 @@ export interface ICategoryUpdateProps extends StateProps, DispatchProps, RouteCo
 
 export interface ICategoryUpdateState {
   isNew: boolean;
+  userExtraId: number;
 }
 
 export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICategoryUpdateState> {
   constructor(props) {
     super(props);
     this.state = {
+      userExtraId: 0,
       isNew: !this.props.match.params || !this.props.match.params.id
     };
   }
@@ -34,6 +38,8 @@ export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICateg
     } else {
       this.props.getEntity(this.props.match.params.id);
     }
+
+    this.props.getUserExtras();
   }
 
   saveEntity = (event, errors, values) => {
@@ -57,8 +63,25 @@ export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICateg
     this.props.history.push('/entity/category');
   };
 
+  userExtraUpdate = element => {
+    const id = element.target.value.toString();
+    if (id === '') {
+      this.setState({
+        userExtraId: -1
+      });
+    } else {
+      for (const i in this.props.userExtras) {
+        if (id === this.props.userExtras[i].id.toString()) {
+          this.setState({
+            userExtraId: this.props.userExtras[i].id
+          });
+        }
+      }
+    }
+  };
+
   render() {
-    const { categoryEntity, loading, updating } = this.props;
+    const { categoryEntity, userExtras, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -97,6 +120,27 @@ export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICateg
                     }}
                   />
                 </AvGroup>
+                <AvGroup>
+                  <Label for="userExtra.id">
+                    <Translate contentKey="learnerappApp.category.userExtra">User Extra</Translate>
+                  </Label>
+                  <AvInput
+                    id="category-userExtra"
+                    type="select"
+                    className="form-control"
+                    name="userExtra.id"
+                    onChange={this.userExtraUpdate}
+                  >
+                    <option value="" key="0" />
+                    {userExtras
+                      ? userExtras.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.id}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/category" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />&nbsp;
                   <span className="d-none d-md-inline">
@@ -118,12 +162,14 @@ export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICateg
 }
 
 const mapStateToProps = (storeState: IRootState) => ({
+  userExtras: storeState.userExtra.entities,
   categoryEntity: storeState.category.entity,
   loading: storeState.category.loading,
   updating: storeState.category.updating
 });
 
 const mapDispatchToProps = {
+  getUserExtras,
   getEntity,
   updateEntity,
   createEntity,

@@ -32,6 +32,10 @@ public class UserExtra implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Card> cards = new HashSet<>();
 
+    @OneToMany(mappedBy = "userExtra")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Category> categories = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -77,6 +81,31 @@ public class UserExtra implements Serializable {
 
     public void setCards(Set<Card> cards) {
         this.cards = cards;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public UserExtra categories(Set<Category> categories) {
+        this.categories = categories;
+        return this;
+    }
+
+    public UserExtra addCategory(Category category) {
+        this.categories.add(category);
+        category.setUserExtra(this);
+        return this;
+    }
+
+    public UserExtra removeCategory(Category category) {
+        this.categories.remove(category);
+        category.setUserExtra(null);
+        return this;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

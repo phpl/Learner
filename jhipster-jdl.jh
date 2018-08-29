@@ -23,4 +23,5 @@ relationship OneToOne {
 relationship OneToMany {
 	Category{card} to Card{category(name) } 
     UserExtra{card} to Card{userExtra}
+    UserExtra{category} to Category{userExtra}
 }

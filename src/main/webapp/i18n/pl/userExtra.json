@@ -17,7 +17,8 @@
                 "title": "User Extra"
             },
             "user": "User",
-            "card": "Card"
+            "card": "Card",
+            "category": "Category"
         }
     }
 }
