@@ -6,6 +6,7 @@ import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 
 import Card from './card/index';
 import Category from './category/index';
+import { Playroom } from './playroom/playroom';
 
 const Routes = ({ match }) => (
   <div>
@@ -13,6 +14,7 @@ const Routes = ({ match }) => (
       {/* prettier-ignore */}
       <ErrorBoundaryRoute path={`${match.url}/card`} component={Card} />
       <ErrorBoundaryRoute path={`${match.url}/category`} component={Category} />
+      <ErrorBoundaryRoute path={`${match.url}/playroom`} component={Playroom} />
     </Switch>
   </div>
 );

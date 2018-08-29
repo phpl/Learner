@@ -29,11 +29,14 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faRoad } from '@fortawesome/free-solid-svg-icons/faRoad';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
 import { faCloud } from '@fortawesome/free-solid-svg-icons/faCloud';
+import { faStar } from '@fortawesome/free-solid-svg-icons/faStar';
 
 export const loadIcons = () => {
   library.add(
+    faArrowRight,
+    faStar,
     faCloud,
     faSort,
     faEye,
