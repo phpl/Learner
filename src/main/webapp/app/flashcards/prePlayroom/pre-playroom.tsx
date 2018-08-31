@@ -90,12 +90,11 @@ export class PrePlayroom extends React.Component<IPrePlayroomProps, IPrePlayroom
                       : null}
                   </AvInput>
                 </AvGroup>
-                <Button color="info" id="randomize" onClick={this.randomSelect} disabled={updating}>
+                <Button color="info" id="randomize" onClick={this.randomSelect} disabled={updating} size="lg" block>
                   <FontAwesomeIcon icon="dice" />&nbsp;
                   <Translate contentKey="preplayroom.randomize">Random Category</Translate>
                 </Button>
-                &nbsp;
-                <Button color="primary" id="select" type="submit" disabled={updating}>
+                <Button color="primary" id="select" type="submit" disabled={updating} size="lg" block>
                   <FontAwesomeIcon icon="hand-pointer" />&nbsp;
                   <Translate contentKey="preplayroom.select">Select Category</Translate>
                 </Button>

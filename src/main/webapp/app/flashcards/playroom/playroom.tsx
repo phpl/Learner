@@ -51,7 +51,8 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
           starsVisibility: false,
           isNext: true,
           isFlipped: false,
-          cardsIndex: this.state.cardsIndex + 1
+          cardsIndex: this.state.cardsIndex + 1,
+          rating: 0
         });
       } else {
         this.props.history.push('/flashcards/postplayroom');
