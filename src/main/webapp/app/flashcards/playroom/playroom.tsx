@@ -44,8 +44,18 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
 
   handleNext = () => {
     const cardListSize = this.props.cardList.length - 1;
-    if (this.state.rating > 0 && this.state.cardsIndex < cardListSize) {
-      this.setState({ ...this.state, starsVisibility: false, isNext: true, isFlipped: false, cardsIndex: this.state.cardsIndex + 1 });
+    if (this.state.rating > 0) {
+      if (this.state.cardsIndex < cardListSize) {
+        this.setState({
+          ...this.state,
+          starsVisibility: false,
+          isNext: true,
+          isFlipped: false,
+          cardsIndex: this.state.cardsIndex + 1
+        });
+      } else {
+        this.props.history.push('/flashcards/postplayroom');
+      }
     } else {
       if (this.props.currentLocale === 'en') {
         toast.error('No stars selected!');

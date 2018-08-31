@@ -1,0 +1,8 @@
+{
+  "postplayroom" : {
+    "postMessage" : "You did great!",
+    "restartMessage" : "Want to play one more time?",
+    "agreeMessage" : "Yes",
+    "disagreeMessage" : "No"
+  }
+}

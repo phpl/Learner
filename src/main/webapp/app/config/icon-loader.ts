@@ -24,17 +24,17 @@ import { faAsterisk } from '@fortawesome/free-solid-svg-icons/faAsterisk';
 import { faFlag } from '@fortawesome/free-solid-svg-icons/faFlag';
 import { faBell } from '@fortawesome/free-solid-svg-icons/faBell';
 import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
-import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faRoad } from '@fortawesome/free-solid-svg-icons/faRoad';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowRight, faChalkboardTeacher, faDice, faHandPointer } from '@fortawesome/free-solid-svg-icons';
+import { faSmileBeam, faFrown, faArrowRight, faChalkboardTeacher, faDice, faHandPointer } from '@fortawesome/free-solid-svg-icons';
 import { faCloud } from '@fortawesome/free-solid-svg-icons/faCloud';
 import { faStar } from '@fortawesome/free-solid-svg-icons/faStar';
 
 export const loadIcons = () => {
   library.add(
+    faSmileBeam,
+    faFrown,
     faHandPointer,
     faArrowRight,
     faDice,
