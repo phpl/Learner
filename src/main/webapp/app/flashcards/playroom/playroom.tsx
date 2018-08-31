@@ -89,13 +89,10 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
                   >
                     {currentCard.frontText ? <h3>{currentCard.frontText}</h3> : null}
                     {currentCard.frontImage ? (
-                      <a onClick={openFile(currentCard.frontImageContentType, currentCard.frontImage)}>
-                        <img
-                          src={`data:${currentCard.frontImageContentType};base64,${currentCard.frontImage}`}
-                          style={{ maxHeight: '350px' }}
-                        />
-                        &nbsp;
-                      </a>
+                      <img
+                        src={`data:${currentCard.frontImageContentType};base64,${currentCard.frontImage}`}
+                        style={{ maxHeight: '350px' }}
+                      />
                     ) : null}
                   </Front>
                   <Back
@@ -107,13 +104,10 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
                   >
                     {currentCard.backText ? <h3>{currentCard.backText}</h3> : null}
                     {currentCard.backImage ? (
-                      <a onClick={openFile(currentCard.backImageContentType, currentCard.backImage)}>
-                        <img
-                          src={`data:${currentCard.backImageContentType};base64,${currentCard.backImage}`}
-                          style={{ maxHeight: '350px' }}
-                        />
-                        &nbsp;
-                      </a>
+                      <img
+                        src={`data:${currentCard.backImageContentType};base64,${currentCard.backImage}`}
+                        style={{ maxHeight: '350px' }}
+                      />
                     ) : null}
                   </Back>
                 </Flipper>
