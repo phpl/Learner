@@ -13,7 +13,8 @@ export const ACTION_TYPES = {
   CREATE_CATEGORY: 'category/CREATE_CATEGORY',
   UPDATE_CATEGORY: 'category/UPDATE_CATEGORY',
   DELETE_CATEGORY: 'category/DELETE_CATEGORY',
-  RESET: 'category/RESET'
+  RESET: 'category/RESET',
+  SELECT: 'category/SELECT'
 };
 
 const initialState = {
@@ -90,6 +91,13 @@ export default (state: CategoryState = initialState, action): CategoryState => {
     case ACTION_TYPES.RESET:
       return {
         ...initialState
+      };
+    case ACTION_TYPES.SELECT:
+      return {
+        ...state,
+        updating: false,
+        updateSuccess: true,
+        entity: action.payload
       };
     default:
       return state;
@@ -176,4 +184,9 @@ export const deleteEntityForLoggedUser: ICrudDeleteAction<ICategory> = id => asy
 
 export const reset = () => ({
   type: ACTION_TYPES.RESET
+});
+
+export const selectCategory = entity => ({
+  type: ACTION_TYPES.SELECT,
+  payload: { ...entity }
 });

@@ -15,6 +15,7 @@ export interface IPlayroomState {
   isFlipped: boolean;
   starsVisibility: boolean;
   isNext: boolean;
+  id: number;
 }
 
 export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
@@ -23,7 +24,8 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
     this.state = {
       isFlipped: false,
       starsVisibility: false,
-      isNext: false
+      isNext: false,
+      id: this.props.categoryEntity.id
     };
   }
 
@@ -86,16 +88,16 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
   }
 }
 
-const mapStateToProps = ({  }: IRootState) => ({});
+const mapStateToProps = ({ category }: IRootState) => ({
+  categoryEntity: category.entity
+});
 
-const mapDispatchToProps = {
-  getEntities
-};
+const mapDispatchToProps = {};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 
-connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Playroom);
