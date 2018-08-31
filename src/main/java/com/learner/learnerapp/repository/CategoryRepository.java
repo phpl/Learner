@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 
 /**
@@ -16,4 +17,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     @Transactional
     Long deleteAllByUserExtraId(long userExtraId);
+
+    List<Category> findAllByUserExtraId(Long id);
 }

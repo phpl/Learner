@@ -5,6 +5,7 @@ import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { ICategory, defaultValue } from 'app/shared/model/category.model';
+import { ICard } from 'app/shared/model/card.model';
 
 export const ACTION_TYPES = {
   FETCH_CATEGORY_LIST: 'category/FETCH_CATEGORY_LIST',
@@ -137,6 +138,39 @@ export const deleteEntity: ICrudDeleteAction<ICategory> = id => async dispatch =
     payload: axios.delete(requestUrl)
   });
   dispatch(getEntities());
+  return result;
+};
+
+export const getEntitiesForLoggedUser: ICrudGetAllAction<ICategory> = (page, size, sort) => ({
+  type: ACTION_TYPES.FETCH_CATEGORY_LIST,
+  payload: axios.get<ICategory>(`${apiUrl}?logged=1&cacheBuster=${new Date().getTime()}`)
+});
+
+export const createEntityForLoggedUser: ICrudPutAction<ICategory> = entity => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.CREATE_CATEGORY,
+    payload: axios.post(apiUrl, cleanEntity(entity))
+  });
+  dispatch(getEntitiesForLoggedUser());
+  return result;
+};
+
+export const updateEntityForLoggedUser: ICrudPutAction<ICategory> = entity => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.UPDATE_CATEGORY,
+    payload: axios.put(apiUrl, cleanEntity(entity))
+  });
+  dispatch(getEntitiesForLoggedUser());
+  return result;
+};
+
+export const deleteEntityForLoggedUser: ICrudDeleteAction<ICategory> = id => async dispatch => {
+  const requestUrl = `${apiUrl}/${id}`;
+  const result = await dispatch({
+    type: ACTION_TYPES.DELETE_CATEGORY,
+    payload: axios.delete(requestUrl)
+  });
+  dispatch(getEntitiesForLoggedUser());
   return result;
 };
 

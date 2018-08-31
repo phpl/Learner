@@ -7,7 +7,7 @@ import { Translate, ICrudGetAllAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntities } from 'app/entities/category/category.reducer';
+import { getEntitiesForLoggedUser } from 'app/entities/category/category.reducer';
 import { ICategory } from 'app/shared/model/category.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -16,7 +16,7 @@ export interface ICategoryProps extends StateProps, DispatchProps, RouteComponen
 
 export class Category extends React.Component<ICategoryProps> {
   componentDidMount() {
-    this.props.getEntities();
+    this.props.getEntitiesForLoggedUser();
   }
 
   render() {
@@ -85,7 +85,7 @@ const mapStateToProps = ({ category }: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getEntities
+  getEntitiesForLoggedUser
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

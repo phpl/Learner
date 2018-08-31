@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { ICategory } from 'app/shared/model/category.model';
 import { IRootState } from 'app/shared/reducers';
-import { getEntity, deleteEntity } from 'app/entities/category/category.reducer';
+import { getEntity, deleteEntityForLoggedUser } from 'app/entities/category/category.reducer';
 
 export interface ICategoryDeleteDialogProps extends StateProps, DispatchProps, RouteComponentProps<{ id: number }> {}
 
@@ -17,7 +17,7 @@ export class CategoryDeleteDialog extends React.Component<ICategoryDeleteDialogP
   }
 
   confirmDelete = event => {
-    this.props.deleteEntity(this.props.categoryEntity.id);
+    this.props.deleteEntityForLoggedUser(this.props.categoryEntity.id);
     this.handleClose(event);
   };
 
@@ -57,7 +57,7 @@ const mapStateToProps = ({ category }: IRootState) => ({
   categoryEntity: category.entity
 });
 
-const mapDispatchToProps = { getEntity, deleteEntity };
+const mapDispatchToProps = { getEntity, deleteEntityForLoggedUser };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

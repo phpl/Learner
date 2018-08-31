@@ -109,9 +109,10 @@ public class CategoryResource {
      */
     @GetMapping("/categories")
     @Timed
-    public List<Category> getAllCategories() {
+    public List<Category> getAllCategories(@RequestParam(value="logged", required = false, defaultValue = "false") boolean logged) {
         log.debug("REST request to get all Categories");
-        return categoryRepository.findAll();
+        return logged ? categoryRepository.findAllByUserExtraId(getLoggedUserExtra().get().getId()) : categoryRepository.findAll();
+
     }
 
     /**

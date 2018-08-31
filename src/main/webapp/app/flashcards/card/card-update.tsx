@@ -9,15 +9,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers/index';
 
 import { ICategory } from 'app/shared/model/category.model';
-import { getEntities as getCategories } from 'app/entities/category/category.reducer';
+import { getEntitiesForLoggedUser as getCategories } from 'app/entities/category/category.reducer';
 import { IUserExtra } from 'app/shared/model/user-extra.model';
 import { getEntities as getUserExtras } from 'app/entities/user-extra/user-extra.reducer';
-import {
-  getEntity,
-  setBlob,
-  reset,
-  createEntityForLoggedUser, updateEntityForLoggedUser
-} from 'app/entities/card/card.reducer';
+import { getEntity, setBlob, reset, createEntityForLoggedUser, updateEntityForLoggedUser } from 'app/entities/card/card.reducer';
 import { ICard } from 'app/shared/model/card.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
@@ -105,9 +100,9 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
     const { frontImage, frontImageContentType, backImage, backImageContentType } = cardEntity;
 
     const defaultValues = {
-      'repetitions': 0,
-      'difficulty': 0.3,
-      'daysBetweenReviews': 1
+      repetitions: 0,
+      difficulty: 0.3,
+      daysBetweenReviews: 1
     };
     return (
       <div>
@@ -225,8 +220,7 @@ export class CardUpdate extends React.Component<ICardUpdateProps, ICardUpdateSta
                   <AvField id="card-repetitions" type="hidden" className="form-control" name="repetitions" />
                 </AvGroup>
                 <AvGroup>
-                  <AvField
-                    id="card-difficulty" type="hidden" className="form-control" name="difficulty" />
+                  <AvField id="card-difficulty" type="hidden" className="form-control" name="difficulty" />
                 </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/flashcards/card" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />&nbsp;

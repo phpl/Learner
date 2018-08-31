@@ -9,8 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
 import { ICard } from 'app/shared/model/card.model';
-import { getEntities as getCards } from 'app/entities/card/card.reducer';
-import { getEntity, updateEntity, createEntity, reset } from 'app/entities/category/category.reducer';
+import { getEntitiesForLoggedUser as getCards } from 'app/entities/card/card.reducer';
+import { getEntity, updateEntityForLoggedUser, createEntityForLoggedUser, reset } from 'app/entities/category/category.reducer';
 import { ICategory } from 'app/shared/model/category.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
@@ -51,9 +51,9 @@ export class CategoryUpdate extends React.Component<ICategoryUpdateProps, ICateg
       };
 
       if (this.state.isNew) {
-        this.props.createEntity(entity);
+        this.props.createEntityForLoggedUser(entity);
       } else {
-        this.props.updateEntity(entity);
+        this.props.updateEntityForLoggedUser(entity);
       }
       this.handleClose();
     }
@@ -125,8 +125,8 @@ const mapStateToProps = (storeState: IRootState) => ({
 const mapDispatchToProps = {
   getCards,
   getEntity,
-  updateEntity,
-  createEntity,
+  updateEntityForLoggedUser,
+  createEntityForLoggedUser,
   reset
 };
 
