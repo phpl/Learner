@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Flipper, Front, Back } from 'react-flipper';
 import { RouteComponentProps } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
-import { getEntities } from 'app/entities/category/category.reducer';
-import { Col, Row, ButtonGroup, Button } from 'reactstrap';
+import { Row, ButtonGroup, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Translate } from 'react-jhipster';
 import AnimatedRater from 'app/flashcards/playroom/animatedRater/animated-rater';
+import { getEntitiesForCategory } from 'app/entities/card/card.reducer';
 
 export interface IPlayroomProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
@@ -27,6 +27,10 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
       isNext: false,
       id: this.props.categoryEntity.id
     };
+  }
+
+  componentDidMount() {
+    this.props.getEntitiesForCategory(this.state.id);
   }
 
   flip = () => {
@@ -92,7 +96,9 @@ const mapStateToProps = ({ category }: IRootState) => ({
   categoryEntity: category.entity
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getEntitiesForCategory
+};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

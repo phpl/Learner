@@ -108,9 +108,21 @@ public class CardResource {
      */
     @GetMapping("/cards")
     @Timed
-    public List<Card> getAllCards(@RequestParam(value="logged", required = false, defaultValue = "false") boolean logged) {
-        log.debug("REST request to get all Cards. User logged: {}", logged);
-        return logged ? cardRepository.findAllByUserExtraId(getLoggedUserExtra().get().getId()) : cardRepository.findAll();
+    public List<Card> getAllCards(@RequestParam(value="logged", required = false, defaultValue = "false") boolean logged,
+                                  @RequestParam(value="categoryId", required = false) Long categoryId) {
+        log.debug("REST request to get all Cards. User logged: {}. CategoryId exist: {}", logged, categoryId != null);
+
+        List<Card> cards;
+
+        if (logged) {
+            cards = cardRepository.findAllByUserExtraId(getLoggedUserExtra().get().getId());
+        } else if (categoryId != null) {
+            cards = cardRepository.findAllByCategoryId(categoryId);
+        } else {
+            cards = cardRepository.findAll();
+        }
+
+        return cards;
     }
 
     /**

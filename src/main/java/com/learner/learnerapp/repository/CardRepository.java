@@ -19,4 +19,6 @@ public interface CardRepository extends JpaRepository<Card, Long> {
     Long deleteAllByUserExtraId(long userExtraId);
 
     List<Card> findAllByUserExtraId(long userExtraId);
+
+    List<Card> findAllByCategoryId(long categoryId);
 }
