@@ -2,12 +2,18 @@ package com.learner.learnerapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.learner.learnerapp.domain.Category;
+import com.learner.learnerapp.domain.User;
+import com.learner.learnerapp.domain.UserExtra;
 import com.learner.learnerapp.repository.CategoryRepository;
+import com.learner.learnerapp.repository.UserExtraRepository;
+import com.learner.learnerapp.repository.UserRepository;
+import com.learner.learnerapp.security.SecurityUtils;
 import com.learner.learnerapp.web.rest.errors.BadRequestAlertException;
 import com.learner.learnerapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +37,12 @@ public class CategoryResource {
 
     private final CategoryRepository categoryRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+
+    private UserExtraRepository userExtraRepository;
+
     public CategoryResource(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
@@ -49,10 +61,23 @@ public class CategoryResource {
         if (category.getId() != null) {
             throw new BadRequestAlertException("A new category cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+
+        if (category.getUserExtra() == null) {
+            Optional<UserExtra> currentUserExtra = getLoggedUserExtra();
+            category.setUserExtra(currentUserExtra.get());
+        }
+
         Category result = categoryRepository.save(category);
         return ResponseEntity.created(new URI("/api/categories/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    private Optional<UserExtra> getLoggedUserExtra() {
+        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
+        Optional<User> currentUser = userRepository.findOneByLogin(currentUserLogin.get());
+        return userExtraRepository.findById(currentUser.get().getId());
     }
 
     /**
