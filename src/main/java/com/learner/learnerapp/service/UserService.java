@@ -2,11 +2,9 @@ package com.learner.learnerapp.service;
 
 import com.learner.learnerapp.domain.Authority;
 import com.learner.learnerapp.domain.User;
-import com.learner.learnerapp.domain.UserExtra;
 import com.learner.learnerapp.repository.AuthorityRepository;
 import com.learner.learnerapp.repository.PersistentTokenRepository;
 import com.learner.learnerapp.config.Constants;
-import com.learner.learnerapp.repository.UserExtraRepository;
 import com.learner.learnerapp.repository.UserRepository;
 import com.learner.learnerapp.security.AuthoritiesConstants;
 import com.learner.learnerapp.security.SecurityUtils;
@@ -220,7 +218,7 @@ public class UserService {
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
             userRepository.delete(user);
-            userExtraService.deleteUserExtra(user.getId());
+            userExtraService.deleteUserExtraWithCardsAndCategories(user.getId());
             this.clearUserCaches(user);
             log.debug("Deleted User: {}", user);
         });

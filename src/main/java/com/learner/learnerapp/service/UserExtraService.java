@@ -3,6 +3,7 @@ package com.learner.learnerapp.service;
 import com.learner.learnerapp.domain.User;
 import com.learner.learnerapp.domain.UserExtra;
 import com.learner.learnerapp.repository.CardRepository;
+import com.learner.learnerapp.repository.CategoryRepository;
 import com.learner.learnerapp.repository.UserExtraRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +22,6 @@ public class UserExtraService {
     @Autowired
     private UserExtraRepository userExtraRepository;
 
-    @Autowired
-    private CardRepository cardRepository;
-
     public void registerUserExtra(User newUser) {
         UserExtra newUserExtra = new UserExtra();
         newUserExtra.setUser(newUser);
@@ -33,11 +31,8 @@ public class UserExtraService {
     }
 
 
-    public void deleteUserExtra(long userId) {
+    public void deleteUserExtraWithCardsAndCategories(long userId) {
         userExtraRepository.findById(userId).ifPresent(userExtra -> {
-            long deletedCount = cardRepository.deleteAllByUserExtraId(userId);
-            log.debug("Deleted All cards by UserExtraId, number of deleted: {}", deletedCount);
-
             userExtraRepository.delete(userExtra);
             log.debug("Deleted UserExtra: {}", userExtra);
         });

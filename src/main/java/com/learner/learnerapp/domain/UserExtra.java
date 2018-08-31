@@ -28,11 +28,11 @@ public class UserExtra implements Serializable {
     @JoinColumn(unique = true)
     private User user;
 
-    @OneToMany(mappedBy = "userExtra")
+    @OneToMany(mappedBy = "userExtra", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Card> cards = new HashSet<>();
 
-    @OneToMany(mappedBy = "userExtra")
+    @OneToMany(mappedBy = "userExtra", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Category> categories = new HashSet<>();
 
