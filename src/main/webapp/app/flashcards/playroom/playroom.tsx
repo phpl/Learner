@@ -73,6 +73,8 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
   render() {
     const { cardList } = this.props;
     const currentCard = cardList[this.state.cardsIndex];
+    const imgMultiplier = 0.28;
+    const flipperMultiplier = 0.3;
     return (
       <div>
         {cardList.length > 0 ? (
@@ -83,30 +85,30 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
                   <Front
                     style={{
                       background: '#A8C686',
-                      minWidth: 400,
-                      minHeight: 400
+                      minWidth: screen.width * flipperMultiplier,
+                      minHeight: screen.width * flipperMultiplier
                     }}
                   >
-                    {currentCard.frontText ? <h3>{currentCard.frontText}</h3> : null}
+                    {currentCard.frontText ? <h4>{currentCard.frontText}</h4> : null}
                     {currentCard.frontImage ? (
                       <img
                         src={`data:${currentCard.frontImageContentType};base64,${currentCard.frontImage}`}
-                        style={{ maxHeight: '350px' }}
+                        style={{ maxWidth: screen.width * imgMultiplier }}
                       />
                     ) : null}
                   </Front>
                   <Back
                     style={{
                       background: '#9D9C62',
-                      minWidth: 400,
-                      minHeight: 400
+                      minWidth: screen.width * flipperMultiplier,
+                      minHeight: screen.width * flipperMultiplier
                     }}
                   >
-                    {currentCard.backText ? <h3>{currentCard.backText}</h3> : null}
+                    {currentCard.backText ? <h4>{currentCard.backText}</h4> : null}
                     {currentCard.backImage ? (
                       <img
                         src={`data:${currentCard.backImageContentType};base64,${currentCard.backImage}`}
-                        style={{ maxHeight: '350px' }}
+                        style={{ maxWidth: screen.width * imgMultiplier }}
                       />
                     ) : null}
                   </Back>

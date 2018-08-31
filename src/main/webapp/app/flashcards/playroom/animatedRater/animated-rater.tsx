@@ -115,17 +115,17 @@ export default class AnimatedRater extends React.Component<IAnimatedRaterProps, 
     return (
       <div className="animated-rater">
         {this.state.shouldStart ? (
-          <h4>
+          <h5>
             <span className="d-none d-md-inline">
               <Translate contentKey="playroom.performance">Performance</Translate>
             </span>
-          </h4>
+          </h5>
         ) : (
-          <h4 className="invisible">
+          <h5 className="invisible">
             <span className="d-none d-md-inline">
               <Translate contentKey="playroom.performance">Performance</Translate>
             </span>
-          </h4>
+          </h5>
         )}
         <StaggeredMotion
           defaultStyles={this.state.defaultStyles}
