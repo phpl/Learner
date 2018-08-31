@@ -2,6 +2,7 @@
   "playroom" : {
     "reveal": "Odkryj kartę",
     "next": "Następna karta",
-    "performance": "Skuteczność:"
+    "performance": "Skuteczność:",
+    "nocards": "Brak kart w tej kategorii"
   }
 }

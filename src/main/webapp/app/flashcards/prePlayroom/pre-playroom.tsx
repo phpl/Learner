@@ -11,11 +11,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 import { getEntitiesForLoggedUser, selectCategory } from 'app/entities/category/category.reducer';
 
-export interface ICategoryProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
+export interface IPrePlayroomProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
-export class PrePlayroom extends React.Component<ICategoryProps> {
+export interface IPrePlayroomState {
+  categoryList: any;
+}
+
+export class PrePlayroom extends React.Component<IPrePlayroomProps, IPrePlayroomState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categoryList: {}
+    };
+  }
+
   componentDidMount() {
     this.props.getEntitiesForLoggedUser();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(nextProps.categoryList);
   }
 
   selectCategory = (event, errors, values) => {
@@ -32,7 +47,7 @@ export class PrePlayroom extends React.Component<ICategoryProps> {
   };
 
   randomSelect = () => {
-    const { categoryList } = this.props;
+    const { categoryList } = this.state;
     const randomCategory = categoryList[Math.floor(Math.random() * categoryList.length)];
 
     this.props.selectCategory(randomCategory);

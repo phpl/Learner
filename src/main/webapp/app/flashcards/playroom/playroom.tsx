@@ -5,9 +5,10 @@ import { RouteComponentProps } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
 import { Row, ButtonGroup, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Translate } from 'react-jhipster';
+import { openFile, Translate } from 'react-jhipster';
 import AnimatedRater from 'app/flashcards/playroom/animatedRater/animated-rater';
 import { getEntitiesForCategory } from 'app/entities/card/card.reducer';
+import { toast } from 'react-toastify';
 
 export interface IPlayroomProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
@@ -16,6 +17,8 @@ export interface IPlayroomState {
   starsVisibility: boolean;
   isNext: boolean;
   id: number;
+  cardsIndex: number;
+  rating: number;
 }
 
 export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
@@ -25,7 +28,9 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
       isFlipped: false,
       starsVisibility: false,
       isNext: false,
-      id: this.props.categoryEntity.id
+      id: this.props.categoryEntity.id,
+      cardsIndex: 0,
+      rating: 0
     };
   }
 
@@ -38,62 +43,105 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
   };
 
   handleNext = () => {
-    this.setState({ ...this.state, starsVisibility: false, isNext: true, isFlipped: false });
+    const cardListSize = this.props.cardList.length - 1;
+    if (this.state.rating > 0 && this.state.cardsIndex < cardListSize) {
+      this.setState({ ...this.state, starsVisibility: false, isNext: true, isFlipped: false, cardsIndex: this.state.cardsIndex + 1 });
+    } else {
+      if (this.props.currentLocale === 'en') {
+        toast.error('No stars selected!');
+      } else if (this.props.currentLocale === 'pl') {
+        toast.error('Nie zaznaczono gwiazdek!');
+      }
+    }
+  };
+
+  handleRate = rating => {
+    this.setState({ ...this.state, rating });
   };
 
   render() {
+    const { cardList } = this.props;
+    const currentCard = cardList[this.state.cardsIndex];
     return (
       <div>
-        <Row className="justify-content-center">
-          <div className="col-md-4 col-md-offset-4 text-center">
-            <Flipper isFlipped={this.state.isFlipped} orientation="horizontal">
-              <Front
-                style={{
-                  background: '#A8C686',
-                  minWidth: 400,
-                  minHeight: 400
-                }}
-              >
-                POC Question
-              </Front>
-              <Back
-                style={{
-                  background: '#9D9C62',
-                  minWidth: 400,
-                  minHeight: 400
-                }}
-              >
-                POC Answer
-              </Back>
-            </Flipper>
-          </div>
-        </Row>
-        <Row className="justify-content-center">
-          <div className="col-md-4 col-md-offset-4 text-center">
-            <AnimatedRater shouldStart={this.state.starsVisibility} defaultStyles={null} rating={null} />
-            <ButtonGroup>
-              <Button onClick={this.flip} color="info" size="lg">
-                <FontAwesomeIcon icon="eye" />{' '}
-                <span className="d-none d-md-inline">
-                  <Translate contentKey="playroom.reveal">Reveal</Translate>
-                </span>
-              </Button>
-              <Button onClick={this.handleNext} color="danger" size="lg">
-                <FontAwesomeIcon icon="arrow-right" />{' '}
-                <span className="d-none d-md-inline">
-                  <Translate contentKey="playroom.next">Next</Translate>
-                </span>
-              </Button>
-            </ButtonGroup>
-          </div>
-        </Row>
+        {cardList.length > 0 ? (
+          <React.Fragment>
+            <Row className="justify-content-center">
+              <div className="col-md-4 col-md-offset-4 text-center">
+                <Flipper isFlipped={this.state.isFlipped} orientation="horizontal">
+                  <Front
+                    style={{
+                      background: '#A8C686',
+                      minWidth: 400,
+                      minHeight: 400
+                    }}
+                  >
+                    {currentCard.frontText ? <h3>{currentCard.frontText}</h3> : null}
+                    {currentCard.frontImage ? (
+                      <a onClick={openFile(currentCard.frontImageContentType, currentCard.frontImage)}>
+                        <img
+                          src={`data:${currentCard.frontImageContentType};base64,${currentCard.frontImage}`}
+                          style={{ maxHeight: '350px' }}
+                        />
+                        &nbsp;
+                      </a>
+                    ) : null}
+                  </Front>
+                  <Back
+                    style={{
+                      background: '#9D9C62',
+                      minWidth: 400,
+                      minHeight: 400
+                    }}
+                  >
+                    {currentCard.backText ? <h3>{currentCard.backText}</h3> : null}
+                    {currentCard.backImage ? (
+                      <a onClick={openFile(currentCard.backImageContentType, currentCard.backImage)}>
+                        <img
+                          src={`data:${currentCard.backImageContentType};base64,${currentCard.backImage}`}
+                          style={{ maxHeight: '350px' }}
+                        />
+                        &nbsp;
+                      </a>
+                    ) : null}
+                  </Back>
+                </Flipper>
+              </div>
+            </Row>
+            <Row className="justify-content-center">
+              <div className="col-md-4 col-md-offset-4 text-center">
+                <AnimatedRater handleRate={this.handleRate} shouldStart={this.state.starsVisibility} defaultStyles={null} rating={null} />
+                <ButtonGroup>
+                  <Button onClick={this.flip} color="info" size="lg">
+                    <FontAwesomeIcon icon="eye" />{' '}
+                    <span className="d-none d-md-inline">
+                      <Translate contentKey="playroom.reveal">Reveal</Translate>
+                    </span>
+                  </Button>
+                  <Button onClick={this.handleNext} color="danger" size="lg">
+                    <FontAwesomeIcon icon="arrow-right" />{' '}
+                    <span className="d-none d-md-inline">
+                      <Translate contentKey="playroom.next">Next</Translate>
+                    </span>
+                  </Button>
+                </ButtonGroup>
+              </div>
+            </Row>
+          </React.Fragment>
+        ) : (
+          <h1>
+            <Translate contentKey="playroom.nocards">No cards in this category</Translate>
+          </h1>
+        )}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ category }: IRootState) => ({
-  categoryEntity: category.entity
+const mapStateToProps = (storeState: IRootState) => ({
+  categoryEntity: storeState.category.entity,
+  cardList: storeState.card.entities,
+  currentLocale: storeState.locale.currentLocale
 });
 
 const mapDispatchToProps = {

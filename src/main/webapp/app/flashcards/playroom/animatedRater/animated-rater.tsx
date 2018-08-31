@@ -36,13 +36,17 @@ Star.propTypes = {
   style: PropTypes.any
 };
 
+export interface IAnimatedRaterProps {
+  handleRate;
+}
+
 export interface IAnimatedRaterState {
   shouldStart: boolean;
   rating: number;
   defaultStyles: any;
 }
 
-export default class AnimatedRater extends React.Component<IAnimatedRaterState> {
+export default class AnimatedRater extends React.Component<IAnimatedRaterProps, IAnimatedRaterState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -81,6 +85,7 @@ export default class AnimatedRater extends React.Component<IAnimatedRaterState> 
       rating,
       defaultStyles
     });
+    this.props.handleRate(rating);
   };
 
   getStyle = prevInterpolatedStyles => {

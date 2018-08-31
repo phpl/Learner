@@ -2,6 +2,7 @@
   "playroom" : {
     "reveal": "Reveal card",
     "next": "Next card",
-    "performance": "Performance:"
+    "performance": "Performance:",
+    "nocards": "No cards in this category"
   }
 }

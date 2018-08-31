@@ -182,7 +182,7 @@ public class CardResourceIntTest {
         // Initialize the database
         cardRepository.saveAndFlush(card);
 
-        // Get all the cardList
+        // Get all the categoryList
         restCardMockMvc.perform(get("/api/cards?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
