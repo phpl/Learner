@@ -24,16 +24,16 @@ public class CardService {
     public List<Card> getCardsForGame(List<Card> cards) {
         return cards
             .stream()
-            .filter(this::isOlderThanEightHoursOrJustCreated)
+            .filter(this::isOlderThanFourHoursOrJustCreated)
             .sorted(Collections.reverseOrder(Comparator.comparingDouble(this::calculatePercentageOverdue)))
             .limit(10).collect(Collectors.toList());
     }
 
-    private boolean isOlderThanEightHoursOrJustCreated(Card card) {
+    private boolean isOlderThanFourHoursOrJustCreated(Card card) {
         if (isJustCreated(card.getDateLastReviewed())) {
             return true;
         } else {
-            return Duration.between(card.getDateLastReviewed(), ZonedDateTime.now()).toHours() > 8;
+            return Duration.between(card.getDateLastReviewed(), ZonedDateTime.now()).toHours() > 4;
         }
     }
 
