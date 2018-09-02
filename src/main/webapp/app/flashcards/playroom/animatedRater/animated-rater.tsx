@@ -1,43 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Rater from 'react-rater';
 import { Motion, StaggeredMotion, spring, presets } from 'react-motion';
 import './animated-rater.scss';
-import Translate from 'react-jhipster/lib/src/language/translate';
+import { Translate } from 'react-jhipster';
+import Star from 'app/flashcards/playroom/animatedRater/star';
 
 // https://github.com/NdYAG/react-rater/blob/master/example
 // Author in git above this line.
 // BSD licenced
 // Changed for my usage
 
-const Star = ({ willBeActive, isActive, style }) => {
-  const fill = isActive ? '#fc6' : willBeActive ? '#ffdd99' : '#e3e3e3';
-
-  return (
-    <svg viewBox="0 0 19.481 19.481" width="36" height="36" style={style}>
-      <path
-        fill={fill}
-        d={
-          'm10.201,.758l2.478,5.865 6.344,.545c0.44,0.038 0.619,0.587 ' +
-          '0.285,0.876l-4.812,4.169 1.442,6.202c0.1,0.431-0.367,0.77-0' +
-          '.745,0.541l-5.452-3.288-5.452,3.288c-0.379,0.228-0.845-0.11' +
-          '1-0.745-0.541l1.442-6.202-4.813-4.17c-0.334-0.289-0.156-0.8' +
-          '38 0.285-0.876l6.344-.545 2.478-5.864c0.172-0.408 0.749-0.408 0.921,0z'
-        }
-      />
-    </svg>
-  );
-};
-
-// @ts-ignore
-Star.propTypes = {
-  isActive: PropTypes.bool,
-  willBeActive: PropTypes.bool,
-  style: PropTypes.any
-};
-
 export interface IAnimatedRaterProps {
   handleRate;
+  shouldStart: boolean;
 }
 
 export interface IAnimatedRaterState {
@@ -134,7 +109,7 @@ export default class AnimatedRater extends React.Component<IAnimatedRaterProps, 
         >
           {interpolatingStyles => (
             <Rater total={5} rating={this.state.rating} onRate={this.handleRate}>
-              {interpolatingStyles.map((style, i) => <Star style={{ transform: `scale(${style.x})` }} key={i} />)}
+              {interpolatingStyles.map((style, i) => <Star style={{ transform: `scale(${style.x})` }} key={i} isActive willBeActive />)}
             </Rater>
           )}
         </StaggeredMotion>

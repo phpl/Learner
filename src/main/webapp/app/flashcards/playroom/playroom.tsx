@@ -117,7 +117,7 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
             </Row>
             <Row className="justify-content-center">
               <div className="col-md-4 col-md-offset-4 text-center">
-                <AnimatedRater handleRate={this.handleRate} shouldStart={this.state.starsVisibility} defaultStyles={null} rating={null} />
+                <AnimatedRater handleRate={this.handleRate} shouldStart={this.state.starsVisibility} />
                 <ButtonGroup>
                   <Button onClick={this.flip} color="info" size="lg">
                     <FontAwesomeIcon icon="eye" />{' '}
