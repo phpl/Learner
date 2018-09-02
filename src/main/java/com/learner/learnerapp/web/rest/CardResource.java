@@ -8,11 +8,10 @@ import com.learner.learnerapp.repository.CardRepository;
 import com.learner.learnerapp.repository.UserExtraRepository;
 import com.learner.learnerapp.repository.UserRepository;
 import com.learner.learnerapp.security.SecurityUtils;
+import com.learner.learnerapp.service.CardService;
 import com.learner.learnerapp.web.rest.errors.BadRequestAlertException;
 import com.learner.learnerapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
-import net.bytebuddy.asm.Advice;
-import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -38,13 +38,24 @@ public class CardResource {
     private static final String ENTITY_NAME = "card";
 
     private final CardRepository cardRepository;
+    private final UserRepository userRepository;
+    private final UserExtraRepository userExtraRepository;
+
+    private final CardService cardService;
+
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserExtraRepository userExtraRepository;
+    public CardResource(CardRepository cardRepository, UserRepository userRepository, UserExtraRepository userExtraRepository, CardService cardService) {
+        this.cardRepository = cardRepository;
+        this.userRepository = userRepository;
+        this.userExtraRepository = userExtraRepository;
+        this.cardService = cardService;
+    }
 
     public CardResource(CardRepository cardRepository) {
         this.cardRepository = cardRepository;
+        this.userRepository = null;
+        this.userExtraRepository = null;
+        this.cardService = null;
     }
 
     /**
@@ -108,8 +119,8 @@ public class CardResource {
      */
     @GetMapping("/cards")
     @Timed
-    public List<Card> getAllCards(@RequestParam(value="logged", required = false, defaultValue = "false") boolean logged,
-                                  @RequestParam(value="categoryId", required = false) Long categoryId) {
+    public List<Card> getAllCards(@RequestParam(value = "logged", required = false, defaultValue = "false") boolean logged,
+                                  @RequestParam(value = "categoryId", required = false) Long categoryId) {
         log.debug("REST request to get all Cards. User logged: {}. CategoryId exist: {}", logged, categoryId != null);
 
         List<Card> cards;
@@ -117,7 +128,7 @@ public class CardResource {
         if (logged) {
             cards = cardRepository.findAllByUserExtraId(getLoggedUserExtra().get().getId());
         } else if (categoryId != null) {
-            cards = cardRepository.findAllByCategoryId(categoryId);
+            cards = Objects.requireNonNull(cardService).getCardsForGame(cardRepository.findAllByCategoryId(categoryId));
         } else {
             cards = cardRepository.findAll();
         }

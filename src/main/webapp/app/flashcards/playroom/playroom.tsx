@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { IRootState } from 'app/shared/reducers';
 import { Row, ButtonGroup, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { openFile, Translate } from 'react-jhipster';
+import { Translate } from 'react-jhipster';
 import AnimatedRater from 'app/flashcards/playroom/animatedRater/animated-rater';
 import { getEntitiesForCategory } from 'app/entities/card/card.reducer';
 import { toast } from 'react-toastify';
