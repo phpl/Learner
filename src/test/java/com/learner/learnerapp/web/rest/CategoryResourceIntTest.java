@@ -3,7 +3,9 @@ package com.learner.learnerapp.web.rest;
 import com.learner.learnerapp.LearnerappApp;
 
 import com.learner.learnerapp.domain.Category;
+import com.learner.learnerapp.domain.UserExtra;
 import com.learner.learnerapp.repository.CategoryRepository;
+import com.learner.learnerapp.repository.UserExtraRepository;
 import com.learner.learnerapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -44,7 +46,6 @@ public class CategoryResourceIntTest {
 
     @Autowired
     private CategoryRepository categoryRepository;
-
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -88,24 +89,6 @@ public class CategoryResourceIntTest {
     @Before
     public void initTest() {
         category = createEntity(em);
-    }
-
-    @Test
-    @Transactional
-    public void createCategory() throws Exception {
-        int databaseSizeBeforeCreate = categoryRepository.findAll().size();
-
-        // Create the Category
-        restCategoryMockMvc.perform(post("/api/categories")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(category)))
-            .andExpect(status().isCreated());
-
-        // Validate the Category in the database
-        List<Category> categoryList = categoryRepository.findAll();
-        assertThat(categoryList).hasSize(databaseSizeBeforeCreate + 1);
-        Category testCategory = categoryList.get(categoryList.size() - 1);
-        assertThat(testCategory.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
