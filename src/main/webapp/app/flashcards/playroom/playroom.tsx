@@ -7,7 +7,7 @@ import { Row, ButtonGroup, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Translate } from 'react-jhipster';
 import AnimatedRater from 'app/flashcards/playroom/animatedRater/animated-rater';
-import { getEntitiesForCategory } from 'app/entities/card/card.reducer';
+import { getEntitiesForCategory, updateEntityRevise } from 'app/entities/card/card.reducer';
 import { toast } from 'react-toastify';
 
 export interface IPlayroomProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
@@ -46,23 +46,41 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
     const cardListSize = this.props.cardList.length - 1;
     if (this.state.rating > 0) {
       if (this.state.cardsIndex < cardListSize) {
-        this.setState({
-          ...this.state,
-          starsVisibility: false,
-          isNext: true,
-          isFlipped: false,
-          cardsIndex: this.state.cardsIndex + 1,
-          rating: 0
-        });
+        this.handleCardsSwitch();
       } else {
+        this.finishRevisingCard();
         this.props.history.push('/flashcards/postplayroom');
       }
     } else {
-      if (this.props.currentLocale === 'en') {
-        toast.error('No stars selected!');
-      } else if (this.props.currentLocale === 'pl') {
-        toast.error('Nie zaznaczono gwiazdek!');
-      }
+      this.handleNoStarsSelected();
+    }
+  };
+
+  handleCardsSwitch = () => {
+    this.finishRevisingCard();
+    this.setState({
+      ...this.state,
+      starsVisibility: false,
+      isNext: true,
+      isFlipped: false,
+      cardsIndex: this.state.cardsIndex + 1,
+      rating: 0
+    });
+  };
+
+  finishRevisingCard = () => {
+    const entity = {
+      id: this.props.cardList[this.state.cardsIndex].id,
+      rating: this.state.rating
+    };
+    this.props.updateEntityRevise(entity);
+  };
+
+  handleNoStarsSelected = () => {
+    if (this.props.currentLocale === 'en') {
+      toast.error('No stars selected!');
+    } else if (this.props.currentLocale === 'pl') {
+      toast.error('Nie zaznaczono gwiazdek!');
     }
   };
 
@@ -152,7 +170,8 @@ const mapStateToProps = (storeState: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-  getEntitiesForCategory
+  getEntitiesForCategory,
+  updateEntityRevise
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

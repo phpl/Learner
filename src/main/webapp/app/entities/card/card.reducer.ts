@@ -141,6 +141,13 @@ export const updateEntity: ICrudPutAction<ICard> = entity => async dispatch => {
   return result;
 };
 
+export const updateEntityRevise: ICrudPutAction<ICard> = entity => async dispatch => {
+  return dispatch({
+    type: ACTION_TYPES.UPDATE_CARD,
+    payload: axios.put(`${apiUrl}/review`, cleanEntity(entity))
+  });
+};
+
 export const deleteEntity: ICrudDeleteAction<ICard> = id => async dispatch => {
   const requestUrl = `${apiUrl}/${id}`;
   const result = await dispatch({

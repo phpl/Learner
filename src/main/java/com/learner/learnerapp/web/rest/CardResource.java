@@ -9,6 +9,7 @@ import com.learner.learnerapp.repository.UserExtraRepository;
 import com.learner.learnerapp.repository.UserRepository;
 import com.learner.learnerapp.security.SecurityUtils;
 import com.learner.learnerapp.service.CardService;
+import com.learner.learnerapp.service.dto.CardReviewDTO;
 import com.learner.learnerapp.web.rest.errors.BadRequestAlertException;
 import com.learner.learnerapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -109,6 +111,32 @@ public class CardResource {
         Card result = cardRepository.save(card);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, card.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * PUT  /cards : Updates an existing card after review.
+     *
+     * @param cardReview the cardDto with id of card and rating number
+     * @return the ResponseEntity with status 200 (OK) and with body the updated card,
+     * or with status 400 (Bad Request) if the card is not valid,
+     * or with status 500 (Internal Server Error) if the card couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PutMapping("/cards/review")
+    @Timed
+    @Transactional
+    public ResponseEntity<Card> updateCardReview(@Valid @RequestBody CardReviewDTO cardReview) throws URISyntaxException {
+        log.debug("REST request to update Card after review: {}", cardReview);
+        if (cardReview.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+
+        Card cardById = cardRepository.findById(cardReview.getId()).orElseThrow(() -> new BadRequestAlertException("Entity not found", ENTITY_NAME, "not found"));
+        Card result = Objects.requireNonNull(cardService).updateCardAfterReview(cardById, cardReview.getRating());
+
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, cardReview.getId().toString()))
             .body(result);
     }
 
