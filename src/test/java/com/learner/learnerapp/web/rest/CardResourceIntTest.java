@@ -132,33 +132,6 @@ public class CardResourceIntTest {
 
     @Test
     @Transactional
-    public void createCard() throws Exception {
-        int databaseSizeBeforeCreate = cardRepository.findAll().size();
-
-        // Create the Card
-        restCardMockMvc.perform(post("/api/cards")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(card)))
-            .andExpect(status().isCreated());
-
-        // Validate the Card in the database
-        List<Card> cardList = cardRepository.findAll();
-        assertThat(cardList).hasSize(databaseSizeBeforeCreate + 1);
-        Card testCard = cardList.get(cardList.size() - 1);
-        assertThat(testCard.getFrontText()).isEqualTo(DEFAULT_FRONT_TEXT);
-        assertThat(testCard.getBackText()).isEqualTo(DEFAULT_BACK_TEXT);
-        assertThat(testCard.getFrontImage()).isEqualTo(DEFAULT_FRONT_IMAGE);
-        assertThat(testCard.getFrontImageContentType()).isEqualTo(DEFAULT_FRONT_IMAGE_CONTENT_TYPE);
-        assertThat(testCard.getBackImage()).isEqualTo(DEFAULT_BACK_IMAGE);
-        assertThat(testCard.getBackImageContentType()).isEqualTo(DEFAULT_BACK_IMAGE_CONTENT_TYPE);
-        assertThat(testCard.getRepetitions()).isEqualTo(DEFAULT_REPETITIONS);
-        assertThat(testCard.getDifficulty()).isEqualTo(DEFAULT_DIFFICULTY);
-        assertThat(testCard.getDaysBetweenReviews()).isEqualTo(DEFAULT_DAYS_BETWEEN_REVIEWS);
-        assertThat(testCard.getDateLastReviewed()).isEqualTo(DEFAULT_DATE_LAST_REVIEWED);
-    }
-
-    @Test
-    @Transactional
     public void createCardWithExistingId() throws Exception {
         int databaseSizeBeforeCreate = cardRepository.findAll().size();
 
