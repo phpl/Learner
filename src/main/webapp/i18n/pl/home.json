@@ -7,11 +7,11 @@
     },
     "application": {
       "about": "O aplikacji",
-      "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "paragraph": "Learnerapp jest aplikacją celującą w poprawę efektywności twojego uczenia się. Korzysta ona z zmodyfikowanego algorytmu SM-2 aby zmaksymalizować twoję postępy w nauce. Możesz ją wykorzystać między innymi przy uczeniu się dowolnego języka, historycznych dat, jako pomoc w różnych dziedzinach nauki lub gdy chcesz być lepszy w rozpoznawaniu przedmiotów/osób przy użyciu zdjęć."
     },
     "flashcards": {
       "about": "O fiszkach",
-      "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "paragraph": "Fiszki są kartami zawierającymi różne informacje na awersie oraz rewersie. Używane są zwykle jako pomoc przy systematycznym uczeniu się. Wtedy na awersie pojawia się pytanie a na rewersie odpowiedź."
     }
   }
 }

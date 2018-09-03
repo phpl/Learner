@@ -7,11 +7,11 @@
     },
     "application": {
       "about": "About application",
-      "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "paragraph": "Learnerapp is an application aiming to improve your learning effectiveness. It uses modificated SM-2 algorithm to maximise your learning progress. You can use it when you are learning any language, historical dates or as help in differents fields of science or when you just want to be better at recognizing things/people by photos."
     },
     "flashcards": {
       "about": "About flashcards",
-      "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "paragraph": "Flashcards are cards containing various informations on front and back side of a card. Usually they are used as study aid when studying systematically. As an aid card have a question on front side and on the back there is an answer."
     }
   }
 }
