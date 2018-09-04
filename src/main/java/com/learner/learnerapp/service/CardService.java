@@ -50,7 +50,7 @@ public class CardService {
 
     private Double calculatePercentageOverdueBeforeRevise(Card card) {
         if (isJustCreated(card)) {
-            return PERCENT_OVERDUE_MAX; // Just created cards weren't revised, so their difficulty should be max
+            return PERCENT_OVERDUE_MAX; // Just created cards weren't revised, so their percent overdue should be max
         } else {
             return calculatePercentageOverdue(card.getDateLastReviewed(), card.getDaysBetweenReviews());
         }
