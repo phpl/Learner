@@ -8,7 +8,8 @@
               "main" : "Start",
               "card" : "Manage Cards",
               "category" : "Manage Categories",
-              "playroom" : "Start learning"
+              "playroom" : "Start learning",
+              "statistics" : "Statistics"
             },
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {

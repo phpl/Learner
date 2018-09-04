@@ -17,5 +17,8 @@ export const AppMenu = props => (
     <DropdownItem tag={Link} to="/flashcards/preplayroom">
       <FontAwesomeIcon icon="asterisk" />&nbsp;<Translate contentKey="global.menu.app.playroom" />
     </DropdownItem>
+    <DropdownItem tag={Link} to="/flashcards/statistics">
+      <FontAwesomeIcon icon="asterisk" />&nbsp;<Translate contentKey="global.menu.app.statistics" />
+    </DropdownItem>
   </NavDropdown>
 );

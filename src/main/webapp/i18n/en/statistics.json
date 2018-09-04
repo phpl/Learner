@@ -1,0 +1,7 @@
+{
+  "statistics" : {
+    "selectLabel": "Select statistic",
+    "cardsInCategories": "Categories by cards number",
+    "revisedCardsInCategories" : "Most revised cards in categories"
+  }
+}
