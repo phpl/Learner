@@ -103,30 +103,30 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
                   <Front
                     style={{
                       background: '#A8C686',
-                      minWidth: screen.width * flipperMultiplier,
-                      minHeight: screen.width * flipperMultiplier
+                      minWidth: window.innerWidth * flipperMultiplier,
+                      minHeight: window.innerWidth * flipperMultiplier
                     }}
                   >
                     {currentCard.frontText ? <h4>{currentCard.frontText}</h4> : null}
                     {currentCard.frontImage ? (
                       <img
                         src={`data:${currentCard.frontImageContentType};base64,${currentCard.frontImage}`}
-                        style={{ maxWidth: screen.width * imgMultiplier }}
+                        style={{ maxWidth: window.innerWidth * imgMultiplier }}
                       />
                     ) : null}
                   </Front>
                   <Back
                     style={{
                       background: '#9D9C62',
-                      minWidth: screen.width * flipperMultiplier,
-                      minHeight: screen.width * flipperMultiplier
+                      minWidth: window.innerWidth * flipperMultiplier,
+                      minHeight: window.innerWidth * flipperMultiplier
                     }}
                   >
                     {currentCard.backText ? <h4>{currentCard.backText}</h4> : null}
                     {currentCard.backImage ? (
                       <img
                         src={`data:${currentCard.backImageContentType};base64,${currentCard.backImage}`}
-                        style={{ maxWidth: screen.width * imgMultiplier }}
+                        style={{ maxWidth: window.innerWidth * imgMultiplier }}
                       />
                     ) : null}
                   </Back>
