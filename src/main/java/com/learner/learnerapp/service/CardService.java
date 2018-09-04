@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class CardService {
 
-    private static final double DIFFICULTY_MAX = 2.0;
+    private static final double PERCENT_OVERDUE_MAX = 2.0;
     private final Logger log = LoggerFactory.getLogger(CardService.class);
 
     private final CardRepository cardRepository;
@@ -50,7 +50,7 @@ public class CardService {
 
     private Double calculatePercentageOverdueBeforeRevise(Card card) {
         if (isJustCreated(card)) {
-            return DIFFICULTY_MAX; // Just created cards weren't revised, so their difficulty should be max
+            return PERCENT_OVERDUE_MAX; // Just created cards weren't revised, so their difficulty should be max
         } else {
             return calculatePercentageOverdue(card.getDateLastReviewed(), card.getDaysBetweenReviews());
         }
@@ -59,7 +59,7 @@ public class CardService {
     private double calculatePercentageOverdue(ZonedDateTime dateLastReviewed, Double daysBetweenReviews) {
         double daysBetweenNowAndLastReview = Period.between(dateLastReviewed.toLocalDate(), ZonedDateTime.now().toLocalDate()).getDays();
         double tempPercentOverdue = daysBetweenNowAndLastReview / daysBetweenReviews;
-        return Math.min(DIFFICULTY_MAX, tempPercentOverdue);
+        return Math.min(PERCENT_OVERDUE_MAX, tempPercentOverdue);
     }
 
     private boolean isJustCreated(Card card) {
