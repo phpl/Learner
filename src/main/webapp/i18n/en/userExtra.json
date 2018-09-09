@@ -18,7 +18,8 @@
             },
             "user": "User",
             "card": "Card",
-            "category": "Category"
+            "category": "Category",
+            "userProgress": "User Progress"
         }
     }
 }

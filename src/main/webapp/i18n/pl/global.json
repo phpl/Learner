@@ -17,6 +17,7 @@
         "card": "Card",
         "userExtra": "User Extra",
         "category": "Category",
+        "userProgress": "User Progress",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

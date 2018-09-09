@@ -21,6 +21,12 @@
             "relationshipName": "category",
             "otherEntityName": "category",
             "otherEntityRelationshipName": "userExtra"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "userProgress",
+            "otherEntityName": "userProgress",
+            "otherEntityRelationshipName": "userExtra"
         }
     ],
     "changelogDate": "20180822200047",
