@@ -70,7 +70,7 @@ public class UserProgressResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final UserProgressResource userProgressResource = new UserProgressResource(userProgressRepository);
+        final UserProgressResource userProgressResource = new UserProgressResource(userProgressRepository, userRepository, userExtraRepository);
         this.restUserProgressMockMvc = MockMvcBuilders.standaloneSetup(userProgressResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

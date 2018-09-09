@@ -1,8 +1,13 @@
 package com.learner.learnerapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.learner.learnerapp.domain.User;
+import com.learner.learnerapp.domain.UserExtra;
 import com.learner.learnerapp.domain.UserProgress;
+import com.learner.learnerapp.repository.UserExtraRepository;
 import com.learner.learnerapp.repository.UserProgressRepository;
+import com.learner.learnerapp.repository.UserRepository;
+import com.learner.learnerapp.security.SecurityUtils;
 import com.learner.learnerapp.web.rest.errors.BadRequestAlertException;
 import com.learner.learnerapp.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -30,8 +35,13 @@ public class UserProgressResource {
 
     private final UserProgressRepository userProgressRepository;
 
-    public UserProgressResource(UserProgressRepository userProgressRepository) {
+    private final UserRepository userRepository;
+    private final UserExtraRepository userExtraRepository;
+
+    public UserProgressResource(UserProgressRepository userProgressRepository, UserRepository userRepository, UserExtraRepository userExtraRepository) {
         this.userProgressRepository = userProgressRepository;
+        this.userRepository = userRepository;
+        this.userExtraRepository = userExtraRepository;
     }
 
     /**
@@ -94,6 +104,32 @@ public class UserProgressResource {
      * @param id the id of the userProgress to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the userProgress, or with status 404 (Not Found)
      */
+
+    /**
+     * GET  /user-progresses-logged : get all the userProgresses for logged user.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of userProgresses in body
+     */
+    @GetMapping("/user-progresses-logged")
+    @Timed
+    public List<UserProgress> getAllUserProgressesForLoggedUsers() {
+        log.debug("REST request to get all UserProgresses for loggedUser");
+        return userProgressRepository.findAllByUserExtraId(getLoggedUserExtra().get().getId());
+    }
+
+    private Optional<UserExtra> getLoggedUserExtra() {
+        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
+        Optional<User> currentUser = userRepository.findOneByLogin(currentUserLogin.get());
+        return userExtraRepository.findById(currentUser.get().getId());
+    }
+
+    /**
+     * GET  /user-progresses/:id : get the "id" userProgress.
+     *
+     * @param id the id of the userProgress to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the userProgress, or with status 404 (Not Found)
+     */
+
     @GetMapping("/user-progresses/{id}")
     @Timed
     public ResponseEntity<UserProgress> getUserProgress(@PathVariable Long id) {

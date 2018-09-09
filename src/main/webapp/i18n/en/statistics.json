@@ -2,6 +2,7 @@
   "statistics" : {
     "selectLabel": "Select statistic",
     "cardsInCategories": "Categories by cards number",
-    "revisedCardsInCategories" : "Most revised cards in categories"
+    "revisedCardsInCategories" : "Most revised cards in categories",
+    "dailyUserProgress" : "Daily user card count"
   }
 }

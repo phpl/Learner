@@ -2,6 +2,7 @@
   "statistics" : {
     "selectLabel": "Wybierz statystykę",
     "cardsInCategories": "Kategoria od ilości kart w kategorii",
-    "revisedCardsInCategories" : "Najczęściej powtarzane karty w kategoriach."
+    "revisedCardsInCategories" : "Najczęściej powtarzane karty w kategoriach",
+    "dailyUserProgress" : "Codzienna ilość kart"
   }
 }
