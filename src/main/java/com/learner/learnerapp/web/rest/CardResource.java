@@ -148,6 +148,7 @@ public class CardResource {
     @GetMapping("/cards")
     @Timed
     public List<Card> getAllCards(@RequestParam(value = "logged", required = false, defaultValue = "false") boolean logged,
+                                  @RequestParam(value = "statistic", required = false, defaultValue = "false") boolean statistic,
                                   @RequestParam(value = "categoryId", required = false) Long categoryId) {
         log.debug("REST request to get all Cards. User logged: {}. CategoryId exist: {}", logged, categoryId != null);
 
@@ -155,8 +156,10 @@ public class CardResource {
 
         if (logged) {
             cards = cardRepository.findAllByUserExtraId(getLoggedUserExtra().get().getId());
-        } else if (categoryId != null) {
+        } else if (categoryId != null && !statistic) {
             cards = Objects.requireNonNull(cardService).getCardsForGame(cardRepository.findAllByCategoryId(categoryId));
+        } else if (categoryId != null && statistic) {
+            cards = cardRepository.findAllByCategoryId(categoryId);
         } else {
             cards = cardRepository.findAll();
         }

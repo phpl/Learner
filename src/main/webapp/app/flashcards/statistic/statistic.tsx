@@ -6,30 +6,26 @@ import { Button, Col, Label, Row } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 import { IRootState } from 'app/shared/reducers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { getEntitiesForLoggedUser } from 'app/entities/category/category.reducer';
+import { getStatisticEntitiesForCategory, reset } from 'app/entities/card/card.reducer';
 
 export interface IStatisticsProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
 export interface IStatisticsState {
-  categoryList: any;
+  data: any;
+  dataKey: string;
+  selected: boolean;
 }
 
-const data = [
-  { name: 'POC CATEGORY 1', pocCardCount: 3 },
-  { name: 'POC CATEGORY 2', pocCardCount: 13 },
-  { name: 'POC CATEGORY 3', pocCardCount: 32 },
-  { name: 'POC CATEGORY 4', pocCardCount: 8 }
-];
-
-const SimpleBarChart = () => (
+const SimpleBarChart = ({ data, dataKeyBar }) => (
   <BarChart width={window.innerWidth * 0.7} height={window.innerHeight * 0.5} data={data}>
     <CartesianGrid strokeDasharray="3 3" />
     <XAxis dataKey="name" />
     <YAxis />
     <Tooltip />
     <Legend verticalAlign="top" />
-    <Bar dataKey="pocCardCount" fill="#A8C686" />
+    <Bar dataKey={dataKeyBar.toString()} fill="#A8C686" />
   </BarChart>
 );
 
@@ -37,11 +33,42 @@ export class Statistics extends React.Component<IStatisticsProps, IStatisticsSta
   constructor(props) {
     super(props);
     this.state = {
-      categoryList: {}
+      data: {},
+      dataKey: '',
+      selected: false
     };
   }
 
-  selectStatistic = () => {};
+  componentDidMount() {
+    this.props.getEntitiesForLoggedUser();
+  }
+
+  selectStatistic = async element => {
+    const id = element.target.value;
+    const data = [];
+    let dataKey = null;
+
+    if (id === '0') {
+      data.push({ name: '', count: 0 });
+      dataKey = 'count';
+    } else if (id === '1') {
+      for (const el of this.props.categories) {
+        await this.props.getEntitiesForCategory(el.id);
+        data.push({ name: el.name, count: this.props.cards.length });
+        this.props.reset();
+      }
+      dataKey = 'count';
+    } else if (id === '2') {
+      for (const el of this.props.categories) {
+        await this.props.getEntitiesForCategory(el.id);
+        const count = Math.max(...this.props.cards.map(o => o.repetitions), 0);
+        data.push({ name: el.name, count });
+        this.props.reset();
+      }
+      dataKey = 'count';
+    }
+    this.setState({ ...this.state, data, dataKey, selected: true });
+  };
 
   render() {
     const overflowAutoStyle = { overflow: 'auto' };
@@ -56,39 +83,45 @@ export class Statistics extends React.Component<IStatisticsProps, IStatisticsSta
         </Row>
         <Row className="justify-content-center">
           <Col md="8">
-            <AvForm onSubmit={this.selectStatistic}>
+            <AvForm>
               <AvGroup>
-                <AvInput id="statistic" type="select" className="form-control" name="select">
-                  <option id="0">
+                <AvInput id="statistic" type="select" className="form-control" name="select" onChange={this.selectStatistic}>
+                  <option value={0}>{}</option>
+                  <option value={1}>
                     <Translate contentKey="statistics.cardsInCategories">Categories by cards number</Translate>
                   </option>
-                  <option id="1">
+                  <option value={2}>
                     <Translate contentKey="statistics.revisedCardsInCategories">Most revised cards in categories</Translate>
                   </option>
                 </AvInput>
               </AvGroup>
-              <Button color="primary" id="select" type="submit" size="lg" block>
-                <FontAwesomeIcon icon="hand-pointer" />&nbsp;
-                <Translate contentKey="statistics.selectLabel">Select statistic</Translate>
-              </Button>
             </AvForm>
           </Col>
         </Row>
-        <div style={overflowAutoStyle}>
-          <Row className="justify-content-center">
-            <Col md="9">
-              <SimpleBarChart />
-            </Col>
-          </Row>
-        </div>
+        {this.state.selected ? (
+          <div style={overflowAutoStyle}>
+            <Row className="justify-content-center">
+              <Col md="9">
+                <SimpleBarChart data={this.state.data} dataKeyBar={this.state.dataKey} />
+              </Col>
+            </Row>
+          </div>
+        ) : null}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({  }: IRootState) => ({});
+const mapStateToProps = (storeState: IRootState) => ({
+  categories: storeState.category.entities,
+  cards: storeState.card.entities
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getEntitiesForLoggedUser,
+  getEntitiesForCategory: getStatisticEntitiesForCategory,
+  reset
+};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

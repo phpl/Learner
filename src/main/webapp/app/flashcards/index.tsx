@@ -9,7 +9,7 @@ import Category from './category/index';
 import Playroom from './playroom/playroom';
 import PrePlayroom from './prePlayroom/pre-playroom';
 import PostPlayroom from './postPlayRoom/post-playroom';
-import { Statistics } from './statistic/statistic';
+import Statistics from './statistic/statistic';
 
 const Routes = ({ match }) => (
   <div>
