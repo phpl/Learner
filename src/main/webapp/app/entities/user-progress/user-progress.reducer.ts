@@ -109,6 +109,11 @@ export const getEntitiesForLoggedUser: ICrudGetAllAction<IUserProgress> = (page,
   payload: axios.get<IUserProgress>(`${apiUrl}-logged?cacheBuster=${new Date().getTime()}`)
 });
 
+export const getTodayProgressForLoggedUser: ICrudGetAllAction<IUserProgress> = (page, size, sort) => ({
+  type: ACTION_TYPES.FETCH_USERPROGRESS_LIST,
+  payload: axios.get<IUserProgress>(`${apiUrl}-today?cacheBuster=${new Date().getTime()}`)
+});
+
 export const getEntity: ICrudGetAction<IUserProgress> = id => {
   const requestUrl = `${apiUrl}/${id}`;
   return {

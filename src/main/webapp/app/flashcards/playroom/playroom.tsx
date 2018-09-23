@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Translate } from 'react-jhipster';
 import AnimatedRater from 'app/flashcards/playroom/animatedRater/animated-rater';
 import { getEntitiesForCategory, updateEntityRevise } from 'app/entities/card/card.reducer';
+import { getTodayProgressForLoggedUser } from 'app/entities/user-progress/user-progress.reducer';
 import { toast } from 'react-toastify';
 
 export interface IPlayroomProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
@@ -171,7 +172,8 @@ const mapStateToProps = (storeState: IRootState) => ({
 
 const mapDispatchToProps = {
   getEntitiesForCategory,
-  updateEntityRevise
+  updateEntityRevise,
+  getTodayProgressForLoggedUser
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

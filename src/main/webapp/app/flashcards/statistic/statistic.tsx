@@ -81,7 +81,7 @@ export class Statistics extends React.Component<IStatisticsProps, IStatisticsSta
       }
       isLineChart = false;
     } else if (id === '3') {
-      for (const el of this.props.userProgresses.slice().reverse()) {
+      for (const el of this.props.userProgresses) {
         data.push({ name: el.day, count: el.dailyRepetitions });
       }
       isLineChart = true;

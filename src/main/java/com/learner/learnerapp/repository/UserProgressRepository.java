@@ -4,6 +4,7 @@ import com.learner.learnerapp.domain.UserProgress;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -16,4 +17,5 @@ public interface UserProgressRepository extends JpaRepository<UserProgress, Long
 
     List<UserProgress> findAllByUserExtraId(long userExtraId);
 
+    UserProgress findByDayAndUserExtraId(LocalDate day, long userExtraId);
 }

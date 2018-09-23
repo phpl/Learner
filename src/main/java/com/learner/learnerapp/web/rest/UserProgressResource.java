@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing UserProgress.
@@ -114,8 +117,34 @@ public class UserProgressResource {
     @Timed
     public List<UserProgress> getAllUserProgressesForLoggedUsers() {
         log.debug("REST request to get all UserProgresses for loggedUser");
-        return userProgressRepository.findAllByUserExtraId(getLoggedUserExtra().get().getId());
+        List<UserProgress> allByUserExtraId = userProgressRepository.findAllByUserExtraId(getLoggedUserExtra().get().getId());
+
+        return getListOfUserProgressFilledWIthDatesBetween(allByUserExtraId);
     }
+
+    private List<UserProgress> getListOfUserProgressFilledWIthDatesBetween(List<UserProgress> allByUserExtraId) {
+        List<UserProgress> allByUserExtraIdFilledWithDatesBetween = allByUserExtraId.stream()
+            .sorted(Comparator.comparing(UserProgress::getDay)).collect(Collectors.toList());
+
+        if (allByUserExtraId.size() > 1) {
+            for (int i = 1; i < allByUserExtraId.size(); i++) {
+                LocalDate date1 = allByUserExtraIdFilledWithDatesBetween.get(i - 1).getDay().plusDays(1);
+                LocalDate date2 = allByUserExtraIdFilledWithDatesBetween.get(i).getDay();
+
+                while (date1.isBefore(date2)) {
+                    UserProgress userProgress = new UserProgress();
+                    userProgress.setDailyRepetitions(0);
+                    userProgress.setDay(date1);
+                    allByUserExtraIdFilledWithDatesBetween.add(userProgress);
+                    date1 = date1.plusDays(1);
+                }
+            }
+        }
+
+        return allByUserExtraIdFilledWithDatesBetween.stream()
+            .sorted(Comparator.comparing(UserProgress::getDay)).collect(Collectors.toList());
+    }
+
 
     private Optional<UserExtra> getLoggedUserExtra() {
         Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
@@ -135,6 +164,20 @@ public class UserProgressResource {
     public ResponseEntity<UserProgress> getUserProgress(@PathVariable Long id) {
         log.debug("REST request to get UserProgress : {}", id);
         Optional<UserProgress> userProgress = userProgressRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(userProgress);
+    }
+
+    /**
+     * GET  /user-progresses-today : get the today userProgress.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the userProgress, or with status 404 (Not Found)
+     */
+
+    @GetMapping("/user-progresses-today")
+    @Timed
+    public ResponseEntity<UserProgress> getTodayUserProgress() {
+        log.debug("REST request to get today UserProgress");
+        Optional<UserProgress> userProgress = Optional.ofNullable(userProgressRepository.findByDayAndUserExtraId(LocalDate.now(), getLoggedUserExtra().get().getId()));
         return ResponseUtil.wrapOrNotFound(userProgress);
     }
 

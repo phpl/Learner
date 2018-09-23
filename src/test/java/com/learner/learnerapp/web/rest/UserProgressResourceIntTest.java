@@ -1,11 +1,11 @@
 package com.learner.learnerapp.web.rest;
 
 import com.learner.learnerapp.LearnerappApp;
-
 import com.learner.learnerapp.domain.UserProgress;
+import com.learner.learnerapp.repository.UserExtraRepository;
 import com.learner.learnerapp.repository.UserProgressRepository;
+import com.learner.learnerapp.repository.UserRepository;
 import com.learner.learnerapp.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +24,6 @@ import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
-
 
 import static com.learner.learnerapp.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,6 +48,10 @@ public class UserProgressResourceIntTest {
 
     @Autowired
     private UserProgressRepository userProgressRepository;
+    @Autowired
+    private UserExtraRepository userExtraRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @Autowired
@@ -80,7 +83,7 @@ public class UserProgressResourceIntTest {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -148,7 +151,7 @@ public class UserProgressResourceIntTest {
             .andExpect(jsonPath("$.[*].day").value(hasItem(DEFAULT_DAY.toString())))
             .andExpect(jsonPath("$.[*].dailyRepetitions").value(hasItem(DEFAULT_DAILY_REPETITIONS)));
     }
-    
+
 
     @Test
     @Transactional
@@ -164,6 +167,7 @@ public class UserProgressResourceIntTest {
             .andExpect(jsonPath("$.day").value(DEFAULT_DAY.toString()))
             .andExpect(jsonPath("$.dailyRepetitions").value(DEFAULT_DAILY_REPETITIONS));
     }
+
     @Test
     @Transactional
     public void getNonExistingUserProgress() throws Exception {
