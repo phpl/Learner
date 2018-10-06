@@ -140,6 +140,15 @@ export const updateEntity: ICrudPutAction<IUserProgress> = entity => async dispa
   return result;
 };
 
+export const reviewEntity: ICrudPutAction<IUserProgress> = () => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.UPDATE_USERPROGRESS,
+    payload: axios.put(`${apiUrl}-today/review`)
+  });
+  dispatch(getEntities());
+  return result;
+};
+
 export const deleteEntity: ICrudDeleteAction<IUserProgress> = id => async dispatch => {
   const requestUrl = `${apiUrl}/${id}`;
   const result = await dispatch({

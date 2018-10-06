@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -179,6 +179,41 @@ public class UserProgressResource {
         log.debug("REST request to get today UserProgress");
         Optional<UserProgress> userProgress = Optional.ofNullable(userProgressRepository.findByDayAndUserExtraId(LocalDate.now(), getLoggedUserExtra().get().getId()));
         return ResponseUtil.wrapOrNotFound(userProgress);
+    }
+
+    /**
+     * PUT  /user-progresses-today/reviev : update daily repetitions.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the updated userProgress,
+     * or with status 400 (Bad Request) if the userProgress is not valid,
+     * or with status 500 (Internal Server Error) if the userProgress couldn't be updated
+     */
+
+    @PutMapping("/user-progresses-today/review")
+    @Timed
+    public ResponseEntity<UserProgress> revievTodayUpdateProgress() {
+        log.debug("REST request to update today UserProgress");
+        Long userExtraId = getLoggedUserExtra().get().getId();
+        Optional<UserProgress> userProgressFromDb = Optional.ofNullable(userProgressRepository.findByDayAndUserExtraId(LocalDate.now(), userExtraId));
+        UserProgress newProgress = userProgressFromDb.orElseGet(createNewUserProgress(userExtraId));
+        newProgress.setDailyRepetitions(newProgress.getDailyRepetitions() + 1);
+
+        UserProgress result = userProgressRepository.save(newProgress);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, newProgress.getId().toString()))
+            .body(result);
+    }
+
+    private Supplier<UserProgress> createNewUserProgress(long userExtraId) {
+        Optional<UserExtra> userExtra = userExtraRepository.findById(userExtraId);
+
+        return () -> {
+            UserProgress userProgress1 = new UserProgress();
+            userProgress1.setDailyRepetitions(0);
+            userProgress1.setDay(LocalDate.now());
+            userProgress1.setUserExtra(userExtra.get());
+            return userProgress1;
+        };
     }
 
     /**
