@@ -110,7 +110,7 @@ export class Statistics extends React.Component<IStatisticsProps, IStatisticsSta
                     <Translate contentKey="statistics.cardsInCategories">Categories by cards number</Translate>
                   </option>
                   <option value={2}>
-                    <Translate contentKey="statistics.revisedCardsInCategories">Most revised cards in categories</Translate>
+                    <Translate contentKey="statistics.revisedCardsInCategories">Most revised categories</Translate>
                   </option>
                   <option value={3}>
                     <Translate contentKey="statistics.dailyUserProgress">Daily user card count</Translate>
