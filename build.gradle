@@ -39,6 +39,9 @@ apply plugin: 'propdeps'
 apply plugin: 'com.moowork.node'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'idea'
+apply plugin: 'application'
+
+applicationDefaultJvmArgs = ["-Djdk.tls.ephemeralDHKeySize=2048"]
 
 dependencyManagement {
   imports {
