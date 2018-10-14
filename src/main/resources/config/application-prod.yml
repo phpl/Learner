@@ -44,7 +44,7 @@ spring:
         contexts: prod
     mail:
         host: smtp.gmail.com
-    port: 587
+        port: 587
         username: learnerappthesis@gmail.com
         password: inzynierkaKotki2018
         protocol: smtp
