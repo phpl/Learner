@@ -1,6 +1,6 @@
 # learnerapp 
 [![Build Status](https://travis-ci.com/phpl/Learner.svg?token=wCoBCsH2BVVpVX8L7qqe&branch=master)](https://travis-ci.com/phpl/Learner)
-[CHECK IT!]https://learnerapp.cfapps.io/#)
+[CHECK IT!](https://learnerapp.cfapps.io/#)
 # About
 It's a BSc thesis application for my university. It's a flashcards monolithic application which is using [SM-2+ algorithm](http://www.blueraja.com/blog/477/a-better-spaced-repetition-learning-algorithm-sm2i).
 #Technologic stack
