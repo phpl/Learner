@@ -13,6 +13,5 @@
                                  constraintName="fk_user_extra_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
-
     </changeSet>
 </databaseChangeLog>

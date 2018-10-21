@@ -13,6 +13,5 @@
                                  constraintName="fk_user_progress_user_extra_id"
                                  referencedColumnNames="id"
                                  referencedTableName="user_extra"/>
-
     </changeSet>
 </databaseChangeLog>
