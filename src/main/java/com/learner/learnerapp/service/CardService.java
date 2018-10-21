@@ -57,7 +57,8 @@ public class CardService {
     }
 
     private double calculatePercentageOverdue(ZonedDateTime dateLastReviewed, Double daysBetweenReviews) {
-        double daysBetweenNowAndLastReview = Period.between(dateLastReviewed.toLocalDate(), ZonedDateTime.now().toLocalDate()).getDays();
+        ZonedDateTime lastDateReviewed = dateLastReviewed == null ? ZonedDateTime.now() : dateLastReviewed;
+        double daysBetweenNowAndLastReview = Period.between(lastDateReviewed.toLocalDate(), ZonedDateTime.now().toLocalDate()).getDays();
         double tempPercentOverdue = daysBetweenNowAndLastReview / daysBetweenReviews;
         return Math.min(PERCENT_OVERDUE_MAX, tempPercentOverdue);
     }

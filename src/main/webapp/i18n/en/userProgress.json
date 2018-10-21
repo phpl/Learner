@@ -1,0 +1,24 @@
+
+{
+    "learnerappApp": {
+        "userProgress" : {
+            "home": {
+                "title": "User Progresses",
+                "createLabel": "Create a new User Progress",
+                "createOrEditLabel": "Create or edit a User Progress"
+            },
+            "created": "A new User Progress is created with identifier {{ param }}",
+            "updated": "A User Progress is updated with identifier {{ param }}",
+            "deleted": "A User Progress is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete User Progress {{ id }}?"
+            },
+            "detail": {
+                "title": "User Progress"
+            },
+            "day": "Day",
+            "dailyRepetitions": "Daily Repetitions",
+            "userExtra": "User Extra"
+        }
+    }
+}

@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Translate } from 'react-jhipster';
 import AnimatedRater from 'app/flashcards/playroom/animatedRater/animated-rater';
 import { getEntitiesForCategory, updateEntityRevise } from 'app/entities/card/card.reducer';
+import { getTodayProgressForLoggedUser, reviewEntity } from 'app/entities/user-progress/user-progress.reducer';
 import { toast } from 'react-toastify';
 
 export interface IPlayroomProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
@@ -47,8 +48,10 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
     if (this.state.rating > 0) {
       if (this.state.cardsIndex < cardListSize) {
         this.handleCardsSwitch();
+        this.props.reviewEntity();
       } else {
         this.finishRevisingCard();
+        this.props.reviewEntity();
         this.props.history.push('/flashcards/postplayroom');
       }
     } else {
@@ -171,7 +174,9 @@ const mapStateToProps = (storeState: IRootState) => ({
 
 const mapDispatchToProps = {
   getEntitiesForCategory,
-  updateEntityRevise
+  updateEntityRevise,
+  getTodayProgressForLoggedUser,
+  reviewEntity
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

@@ -36,6 +36,10 @@ public class UserExtra implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Category> categories = new HashSet<>();
 
+    @OneToMany(mappedBy = "userExtra", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<UserProgress> userProgresses = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -106,6 +110,31 @@ public class UserExtra implements Serializable {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    public Set<UserProgress> getUserProgresses() {
+        return userProgresses;
+    }
+
+    public UserExtra userProgresses(Set<UserProgress> userProgresses) {
+        this.userProgresses = userProgresses;
+        return this;
+    }
+
+    public UserExtra addUserProgress(UserProgress userProgress) {
+        this.userProgresses.add(userProgress);
+        userProgress.setUserExtra(this);
+        return this;
+    }
+
+    public UserExtra removeUserProgress(UserProgress userProgress) {
+        this.userProgresses.remove(userProgress);
+        userProgress.setUserExtra(null);
+        return this;
+    }
+
+    public void setUserProgresses(Set<UserProgress> userProgresses) {
+        this.userProgresses = userProgresses;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

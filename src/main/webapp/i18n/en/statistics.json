@@ -1,0 +1,8 @@
+{
+  "statistics" : {
+    "selectLabel": "Select statistic",
+    "cardsInCategories": "Categories by cards number",
+    "revisedCardsInCategories" : "Most revised categories",
+    "dailyUserProgress" : "Daily user card count"
+  }
+}

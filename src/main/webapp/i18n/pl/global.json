@@ -8,7 +8,8 @@
         "main": "Start",
         "card": "Zarządzaj kartami",
         "category" : "Zarządzaj kategoriami",
-        "playroom" : "Zacznij naukę"
+        "playroom" : "Zacznij naukę",
+        "statistics" : "Statystyki"
       },
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
@@ -16,6 +17,7 @@
         "card": "Card",
         "userExtra": "User Extra",
         "category": "Category",
+        "userProgress": "User Progress",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

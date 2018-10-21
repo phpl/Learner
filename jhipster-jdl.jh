@@ -16,6 +16,11 @@ entity Card {
 
 entity UserExtra
 
+entity UserProgress {
+ 	day	LocalDate
+    dailyRepetitions Integer
+}
+
 relationship OneToOne {
     UserExtra{user} to User
 }
@@ -24,4 +29,5 @@ relationship OneToMany {
 	Category{card} to Card{category(name) } 
     UserExtra{card} to Card{userExtra}
     UserExtra{category} to Category{userExtra}
+    UserExtra{userProgress} to UserProgress{userExtra}
 }

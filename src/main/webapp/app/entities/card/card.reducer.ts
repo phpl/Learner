@@ -162,6 +162,12 @@ export const getEntitiesForCategory: ICrudGetAllAction<ICard> = id => ({
   payload: axios.get<ICard>(`${apiUrl}?categoryId=${id}&cacheBuster=${new Date().getTime()}`)
 });
 
+export const getStatisticEntitiesForCategory = id => async dispatch =>
+  dispatch({
+    type: ACTION_TYPES.FETCH_CARD_LIST,
+    payload: axios.get<ICard>(`${apiUrl}?categoryId=${id}&statistic=true&cacheBuster=${new Date().getTime()}`)
+  });
+
 export const getEntitiesForLoggedUser: ICrudGetAllAction<ICard> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_CARD_LIST,
   payload: axios.get<ICard>(`${apiUrl}?logged=1&cacheBuster=${new Date().getTime()}`)

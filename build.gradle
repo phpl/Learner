@@ -39,6 +39,9 @@ apply plugin: 'propdeps'
 apply plugin: 'com.moowork.node'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'idea'
+apply plugin: 'application'
+
+applicationDefaultJvmArgs = ["-Djdk.tls.ephemeralDHKeySize=2048"]
 
 dependencyManagement {
   imports {
@@ -139,6 +142,9 @@ repositories {
 dependencies {
     // Use ", version: jhipster_dependencies_version, changing: true" if you want
     // to use a SNAPSHOT release instead of a stable release
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-spring-service-connector', version: '2.0.2.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-cloudfoundry-connector', version: '2.0.2.RELEASE'
+
     compile group: "io.github.jhipster", name: "jhipster-framework"
     compile "org.springframework.boot:spring-boot-starter-cache"
     compile "io.dropwizard.metrics:metrics-core"
@@ -210,6 +216,7 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-library"
     compile "org.springframework.cloud:spring-cloud-localconfig-connector"
     compile "org.springframework.cloud:spring-cloud-heroku-connector"
+    compile "org.springframework.cloud:spring-cloud-cloudfoundry-connector"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 

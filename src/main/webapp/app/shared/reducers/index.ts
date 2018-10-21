@@ -25,6 +25,10 @@ import category, {
 import card, {
   CardState
 } from 'app/entities/card/card.reducer';
+// prettier-ignore
+import userProgress, {
+  UserProgressState
+} from 'app/entities/user-progress/user-progress.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -42,6 +46,7 @@ export interface IRootState {
   readonly card: CardState;
   readonly userExtra: UserExtraState;
   readonly category: CategoryState;
+  readonly userProgress: UserProgressState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -61,6 +66,7 @@ const rootReducer = combineReducers<IRootState>({
   card,
   userExtra,
   category,
+  userProgress,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

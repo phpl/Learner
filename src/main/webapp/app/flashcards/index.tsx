@@ -9,6 +9,7 @@ import Category from './category/index';
 import Playroom from './playroom/playroom';
 import PrePlayroom from './prePlayroom/pre-playroom';
 import PostPlayroom from './postPlayRoom/post-playroom';
+import Statistics from './statistic/statistic';
 
 const Routes = ({ match }) => (
   <div>
@@ -19,6 +20,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}/preplayroom`} component={PrePlayroom} />
       <ErrorBoundaryRoute path={`${match.url}/playroom`} component={Playroom} />
       <ErrorBoundaryRoute path={`${match.url}/postplayroom`} component={PostPlayroom} />
+      <ErrorBoundaryRoute path={`${match.url}/statistics`} component={Statistics} />
     </Switch>
   </div>
 );
