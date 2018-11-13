@@ -31,7 +31,6 @@ export const Brand = props => (
     <span className="brand-title">
       <Translate contentKey="global.title">Learnerapp</Translate>
     </span>
-    <span className="navbar-version">{appConfig.VERSION}</span>
   </NavbarBrand>
 );
 
