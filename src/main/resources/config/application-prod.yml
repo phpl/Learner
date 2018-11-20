@@ -108,7 +108,7 @@ jhipster:
             key: c7939e85fbff52d3a46f509e9803f368e3c1ce52
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: learnerappthesis@gmail.com
-        base-url: https://learnerapp.cfapps.io/#/ # Modify according to your server's URL
+        base-url: https://learnerapp.cfapps.io # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
             enabled: true
