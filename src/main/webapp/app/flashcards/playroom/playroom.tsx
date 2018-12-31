@@ -96,6 +96,7 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
     const currentCard = cardList[this.state.cardsIndex];
     const imgMultiplier = 0.28;
     const flipperMultiplier = 0.3;
+    const rating = this.state.rating;
     return (
       <div>
         {cardList.length > 0 ? (
@@ -146,7 +147,7 @@ export class Playroom extends React.Component<IPlayroomProps, IPlayroomState> {
                       <Translate contentKey="playroom.reveal">Reveal</Translate>
                     </span>
                   </Button>
-                  <Button onClick={this.handleNext} color="danger" size="lg">
+                  <Button onClick={this.handleNext} color={rating > 0 ? 'danger' : 'secondary'} size="lg">
                     <FontAwesomeIcon icon="arrow-right" />{' '}
                     <span className="d-none d-md-inline">
                       <Translate contentKey="playroom.next">Next</Translate>
