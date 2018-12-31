@@ -45,6 +45,18 @@ export class Home extends React.Component<IHomeProp> {
               </Alert>
             </div>
           )}
+          {account && account.login ? (
+            <div>
+              <h4>
+                <Translate contentKey="home.tutorial.about">Tutorial</Translate>
+              </h4>
+              <p>
+                <Translate contentKey="home.tutorial.paragraph">Lorem Ipsum</Translate>
+              </p>
+            </div>
+          ) : (
+            ''
+          )}
           <h4>
             <Translate contentKey="home.application.about">About application</Translate>
           </h4>

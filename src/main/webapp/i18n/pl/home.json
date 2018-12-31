@@ -12,6 +12,10 @@
     "flashcards": {
       "about": "O fiszkach",
       "paragraph": "Fiszki są kartami zawierającymi różne informacje na awersie oraz rewersie. Używane są zwykle jako pomoc przy systematycznym uczeniu się. Wtedy na awersie pojawia się pytanie a na rewersie odpowiedź."
+    },
+    "tutorial": {
+      "about": "Poradnik",
+      "paragraph": "Aby rozpocząć naukę należy dodać kategorie i karty z których będziemy się uczyć. Zrobimy to w menu Start, po wykonaniu tej czynności możemy zacząć naukę!"
     }
   }
 }

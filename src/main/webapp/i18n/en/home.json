@@ -12,6 +12,10 @@
     "flashcards": {
       "about": "About flashcards",
       "paragraph": "Flashcards are cards containing various informations on front and back side of a card. Usually they are used as study aid when studying systematically. As an aid card have a question on front side and on the back there is an answer."
+    },
+    "tutorial": {
+      "about": "Tutorial",
+      "paragraph": "To start learning process you should add category and cards in Start menu, after that you can start revise them!"
     }
   }
 }
