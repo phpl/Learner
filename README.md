@@ -4,7 +4,7 @@
 [CHECK IT ONLINE!](https://learnerapp.cfapps.io/#)
 # About
 It's a BSc thesis application for my university. It's a flashcards monolithic application which is using [SM-2+ algorithm](http://www.blueraja.com/blog/477/a-better-spaced-repetition-learning-algorithm-sm2i).
-# Technologic stack
+# Technology stack
 * Generators: JHipster for generating production ready skeleton
 * Languages: Java (Backend), TypeScript (Frontend)
 * Database: PostgreSQL(production), H2(development)
